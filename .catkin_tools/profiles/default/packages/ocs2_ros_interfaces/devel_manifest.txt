@@ -1,0 +1,8 @@
+ocs2-main/ocs2_ros_interfaces
+/root/catkin_ws/devel/.private/ocs2_ros_interfaces/lib/libocs2_ros_interfaces.so /root/catkin_ws/devel/lib/libocs2_ros_interfaces.so
+/root/catkin_ws/devel/.private/ocs2_ros_interfaces/lib/ocs2_ros_interfaces/multiplot_remap /root/catkin_ws/devel/lib/ocs2_ros_interfaces/multiplot_remap
+/root/catkin_ws/devel/.private/ocs2_ros_interfaces/lib/ocs2_ros_interfaces/ocs2_ros_interfaces_lintTarget /root/catkin_ws/devel/lib/ocs2_ros_interfaces/ocs2_ros_interfaces_lintTarget
+/root/catkin_ws/devel/.private/ocs2_ros_interfaces/lib/ocs2_ros_interfaces/test_custom_callback_queue /root/catkin_ws/devel/lib/ocs2_ros_interfaces/test_custom_callback_queue
+/root/catkin_ws/devel/.private/ocs2_ros_interfaces/lib/pkgconfig/ocs2_ros_interfaces.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_ros_interfaces.pc
+/root/catkin_ws/devel/.private/ocs2_ros_interfaces/share/ocs2_ros_interfaces/cmake/ocs2_ros_interfacesConfig-version.cmake /root/catkin_ws/devel/share/ocs2_ros_interfaces/cmake/ocs2_ros_interfacesConfig-version.cmake
+/root/catkin_ws/devel/.private/ocs2_ros_interfaces/share/ocs2_ros_interfaces/cmake/ocs2_ros_interfacesConfig.cmake /root/catkin_ws/devel/share/ocs2_ros_interfaces/cmake/ocs2_ros_interfacesConfig.cmake

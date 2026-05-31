@@ -1,0 +1,5 @@
+ocs2-main/ocs2_ipm
+/root/catkin_ws/devel/.private/ocs2_ipm/lib/libocs2_ipm.so /root/catkin_ws/devel/lib/libocs2_ipm.so
+/root/catkin_ws/devel/.private/ocs2_ipm/lib/pkgconfig/ocs2_ipm.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_ipm.pc
+/root/catkin_ws/devel/.private/ocs2_ipm/share/ocs2_ipm/cmake/ocs2_ipmConfig-version.cmake /root/catkin_ws/devel/share/ocs2_ipm/cmake/ocs2_ipmConfig-version.cmake
+/root/catkin_ws/devel/.private/ocs2_ipm/share/ocs2_ipm/cmake/ocs2_ipmConfig.cmake /root/catkin_ws/devel/share/ocs2_ipm/cmake/ocs2_ipmConfig.cmake

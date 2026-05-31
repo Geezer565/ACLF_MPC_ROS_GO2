@@ -1,0 +1,4 @@
+unitree_ros/robots/b1_description
+/root/catkin_ws/devel/.private/b1_description/lib/pkgconfig/b1_description.pc /root/catkin_ws/devel/lib/pkgconfig/b1_description.pc
+/root/catkin_ws/devel/.private/b1_description/share/b1_description/cmake/b1_descriptionConfig.cmake /root/catkin_ws/devel/share/b1_description/cmake/b1_descriptionConfig.cmake
+/root/catkin_ws/devel/.private/b1_description/share/b1_description/cmake/b1_descriptionConfig-version.cmake /root/catkin_ws/devel/share/b1_description/cmake/b1_descriptionConfig-version.cmake

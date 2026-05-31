@@ -1,0 +1,34 @@
+adaptive_estimator
+{
+  ; Sliding variable definition:
+  ; sigma_p = e_v + lambdaPosition * e_p
+  ; sigma_o = e_w + lambdaOrientation * e_o
+  lambdaPosition       2.0
+  lambdaOrientation    1.5
+
+  ; Online adaptation gains
+  forceAdaptationGain  3.0
+  torqueAdaptationGain 1.5
+
+  ; Saturation for estimated external wrench
+  maxForceEstimate     150.0
+  maxTorqueEstimate    80.0
+}
+
+adaptive_clf
+{
+  ; CLF-like inequality:
+  ; epsilon - sigma^T * d_hat - clfRate * ||sigma||^2 >= 0
+  lambdaPosition       2.0
+  lambdaOrientation    1.5
+  clfRate              0.6
+  epsilon              0.05
+
+  ; Soft-constraint penalty
+  useSoftConstraint    true
+  softConstraintMu     0.1
+  softConstraintDelta  5.0
+
+  ; Additional quadratic cost on force-bias tracking
+  inputBiasWeight      2e-3
+}

@@ -1,0 +1,7 @@
+ocs2-main/ocs2_mpcnet/ocs2_mpcnet_core
+/root/catkin_ws/devel/.private/ocs2_mpcnet_core/lib/libocs2_mpcnet_core.so /root/catkin_ws/devel/lib/libocs2_mpcnet_core.so
+/root/catkin_ws/devel/.private/ocs2_mpcnet_core/lib/python3/dist-packages/ocs2_mpcnet_core/__init__.py /root/catkin_ws/devel/lib/python3/dist-packages/ocs2_mpcnet_core/__init__.py
+/root/catkin_ws/devel/.private/ocs2_mpcnet_core/lib/python3/dist-packages/ocs2_mpcnet_core/MpcnetPybindings.cpython-38-x86_64-linux-gnu.so /root/catkin_ws/devel/lib/python3/dist-packages/ocs2_mpcnet_core/MpcnetPybindings.cpython-38-x86_64-linux-gnu.so
+/root/catkin_ws/devel/.private/ocs2_mpcnet_core/lib/pkgconfig/ocs2_mpcnet_core.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_mpcnet_core.pc
+/root/catkin_ws/devel/.private/ocs2_mpcnet_core/share/ocs2_mpcnet_core/cmake/ocs2_mpcnet_coreConfig.cmake /root/catkin_ws/devel/share/ocs2_mpcnet_core/cmake/ocs2_mpcnet_coreConfig.cmake
+/root/catkin_ws/devel/.private/ocs2_mpcnet_core/share/ocs2_mpcnet_core/cmake/ocs2_mpcnet_coreConfig-version.cmake /root/catkin_ws/devel/share/ocs2_mpcnet_core/cmake/ocs2_mpcnet_coreConfig-version.cmake

@@ -1,0 +1,11 @@
+ocs2-main/ocs2_robotic_examples/ocs2_legged_robot_ros
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/lib/libocs2_legged_robot_ros.so /root/catkin_ws/devel/lib/libocs2_legged_robot_ros.so
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/lib/pkgconfig/ocs2_legged_robot_ros.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_legged_robot_ros.pc
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/lib/ocs2_legged_robot_ros/legged_robot_sqp_mpc /root/catkin_ws/devel/lib/ocs2_legged_robot_ros/legged_robot_sqp_mpc
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/lib/ocs2_legged_robot_ros/legged_robot_ddp_mpc /root/catkin_ws/devel/lib/ocs2_legged_robot_ros/legged_robot_ddp_mpc
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/lib/ocs2_legged_robot_ros/legged_robot_target /root/catkin_ws/devel/lib/ocs2_legged_robot_ros/legged_robot_target
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/lib/ocs2_legged_robot_ros/legged_robot_ipm_mpc /root/catkin_ws/devel/lib/ocs2_legged_robot_ros/legged_robot_ipm_mpc
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/lib/ocs2_legged_robot_ros/legged_robot_gait_command /root/catkin_ws/devel/lib/ocs2_legged_robot_ros/legged_robot_gait_command
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/lib/ocs2_legged_robot_ros/legged_robot_dummy /root/catkin_ws/devel/lib/ocs2_legged_robot_ros/legged_robot_dummy
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/share/ocs2_legged_robot_ros/cmake/ocs2_legged_robot_rosConfig-version.cmake /root/catkin_ws/devel/share/ocs2_legged_robot_ros/cmake/ocs2_legged_robot_rosConfig-version.cmake
+/root/catkin_ws/devel/.private/ocs2_legged_robot_ros/share/ocs2_legged_robot_ros/cmake/ocs2_legged_robot_rosConfig.cmake /root/catkin_ws/devel/share/ocs2_legged_robot_ros/cmake/ocs2_legged_robot_rosConfig.cmake

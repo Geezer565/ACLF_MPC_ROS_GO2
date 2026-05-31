@@ -1,0 +1,7 @@
+ocs2-main/ocs2_robotic_examples/ocs2_quadrotor
+/root/catkin_ws/devel/.private/ocs2_quadrotor/lib/libocs2_quadrotor.so /root/catkin_ws/devel/lib/libocs2_quadrotor.so
+/root/catkin_ws/devel/.private/ocs2_quadrotor/lib/python3/dist-packages/ocs2_quadrotor/__init__.py /root/catkin_ws/devel/lib/python3/dist-packages/ocs2_quadrotor/__init__.py
+/root/catkin_ws/devel/.private/ocs2_quadrotor/lib/python3/dist-packages/ocs2_quadrotor/QuadrotorPyBindings.cpython-38-x86_64-linux-gnu.so /root/catkin_ws/devel/lib/python3/dist-packages/ocs2_quadrotor/QuadrotorPyBindings.cpython-38-x86_64-linux-gnu.so
+/root/catkin_ws/devel/.private/ocs2_quadrotor/lib/pkgconfig/ocs2_quadrotor.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_quadrotor.pc
+/root/catkin_ws/devel/.private/ocs2_quadrotor/share/ocs2_quadrotor/cmake/ocs2_quadrotorConfig-version.cmake /root/catkin_ws/devel/share/ocs2_quadrotor/cmake/ocs2_quadrotorConfig-version.cmake
+/root/catkin_ws/devel/.private/ocs2_quadrotor/share/ocs2_quadrotor/cmake/ocs2_quadrotorConfig.cmake /root/catkin_ws/devel/share/ocs2_quadrotor/cmake/ocs2_quadrotorConfig.cmake

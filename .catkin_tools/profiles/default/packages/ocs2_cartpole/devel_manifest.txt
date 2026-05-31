@@ -1,0 +1,5 @@
+ocs2-main/ocs2_robotic_examples/ocs2_cartpole
+/root/catkin_ws/devel/.private/ocs2_cartpole/lib/libocs2_cartpole.so /root/catkin_ws/devel/lib/libocs2_cartpole.so
+/root/catkin_ws/devel/.private/ocs2_cartpole/lib/pkgconfig/ocs2_cartpole.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_cartpole.pc
+/root/catkin_ws/devel/.private/ocs2_cartpole/share/ocs2_cartpole/cmake/ocs2_cartpoleConfig.cmake /root/catkin_ws/devel/share/ocs2_cartpole/cmake/ocs2_cartpoleConfig.cmake
+/root/catkin_ws/devel/.private/ocs2_cartpole/share/ocs2_cartpole/cmake/ocs2_cartpoleConfig-version.cmake /root/catkin_ws/devel/share/ocs2_cartpole/cmake/ocs2_cartpoleConfig-version.cmake

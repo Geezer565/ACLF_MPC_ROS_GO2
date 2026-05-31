@@ -1,0 +1,7 @@
+ocs2-main/ocs2_robotic_examples/ocs2_ballbot
+/root/catkin_ws/devel/.private/ocs2_ballbot/lib/libocs2_ballbot.so /root/catkin_ws/devel/lib/libocs2_ballbot.so
+/root/catkin_ws/devel/.private/ocs2_ballbot/lib/python3/dist-packages/ocs2_ballbot/__init__.py /root/catkin_ws/devel/lib/python3/dist-packages/ocs2_ballbot/__init__.py
+/root/catkin_ws/devel/.private/ocs2_ballbot/lib/python3/dist-packages/ocs2_ballbot/BallbotPyBindings.cpython-38-x86_64-linux-gnu.so /root/catkin_ws/devel/lib/python3/dist-packages/ocs2_ballbot/BallbotPyBindings.cpython-38-x86_64-linux-gnu.so
+/root/catkin_ws/devel/.private/ocs2_ballbot/lib/pkgconfig/ocs2_ballbot.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_ballbot.pc
+/root/catkin_ws/devel/.private/ocs2_ballbot/share/ocs2_ballbot/cmake/ocs2_ballbotConfig-version.cmake /root/catkin_ws/devel/share/ocs2_ballbot/cmake/ocs2_ballbotConfig-version.cmake
+/root/catkin_ws/devel/.private/ocs2_ballbot/share/ocs2_ballbot/cmake/ocs2_ballbotConfig.cmake /root/catkin_ws/devel/share/ocs2_ballbot/cmake/ocs2_ballbotConfig.cmake

@@ -1,0 +1,4 @@
+ocs2-main/ocs2_thirdparty
+/root/catkin_ws/devel/.private/ocs2_thirdparty/lib/pkgconfig/ocs2_thirdparty.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_thirdparty.pc
+/root/catkin_ws/devel/.private/ocs2_thirdparty/share/ocs2_thirdparty/cmake/ocs2_thirdpartyConfig.cmake /root/catkin_ws/devel/share/ocs2_thirdparty/cmake/ocs2_thirdpartyConfig.cmake
+/root/catkin_ws/devel/.private/ocs2_thirdparty/share/ocs2_thirdparty/cmake/ocs2_thirdpartyConfig-version.cmake /root/catkin_ws/devel/share/ocs2_thirdparty/cmake/ocs2_thirdpartyConfig-version.cmake

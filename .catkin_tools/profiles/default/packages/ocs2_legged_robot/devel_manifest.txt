@@ -1,0 +1,5 @@
+ocs2-main/ocs2_robotic_examples/ocs2_legged_robot
+/root/catkin_ws/devel/.private/ocs2_legged_robot/lib/libocs2_legged_robot.so /root/catkin_ws/devel/lib/libocs2_legged_robot.so
+/root/catkin_ws/devel/.private/ocs2_legged_robot/lib/pkgconfig/ocs2_legged_robot.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_legged_robot.pc
+/root/catkin_ws/devel/.private/ocs2_legged_robot/share/ocs2_legged_robot/cmake/ocs2_legged_robotConfig.cmake /root/catkin_ws/devel/share/ocs2_legged_robot/cmake/ocs2_legged_robotConfig.cmake
+/root/catkin_ws/devel/.private/ocs2_legged_robot/share/ocs2_legged_robot/cmake/ocs2_legged_robotConfig-version.cmake /root/catkin_ws/devel/share/ocs2_legged_robot/cmake/ocs2_legged_robotConfig-version.cmake

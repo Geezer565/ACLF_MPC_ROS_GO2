@@ -1,0 +1,50 @@
+<launch>
+    <arg name="robot_type" default="$(env ROBOT_TYPE)" doc="Robot type: go2"/>
+    <arg name="gui" default="true" doc="是否开启 Gazebo GUI"/>
+    <arg name="cheater" default="false"/>
+
+    <!-- ====== Gazebo + 机器人加载 ====== -->
+    <param name="legged_robot_description" command="$(find xacro)/xacro $(find legged_unitree_description)/urdf/robot.xacro
+       robot_type:=$(arg robot_type)
+    "/>
+    <node name="generate_urdf" pkg="legged_common" type="generate_urdf.sh" output="screen"
+          args="$(find legged_unitree_description)/urdf/robot.xacro $(arg robot_type)"/>
+
+    <rosparam file="$(find legged_gazebo)/config/default.yaml" command="load"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find legged_gazebo)/worlds/empty_world.world"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg if="$(eval not arg('gui'))" name="headless" value="true"/>
+    </include>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+          args="-z 0.35 -param legged_robot_description -urdf -model $(arg robot_type)" output="screen"/>
+
+    <!-- ====== 控制器 ====== -->
+    <param name="urdfFile" value="/tmp/legged_control/$(arg robot_type).urdf"/>
+    <param name="taskFile" value="$(find legged_controllers)/config/$(arg robot_type)/task.info"/>
+    <param name="referenceFile" value="$(find legged_controllers)/config/$(arg robot_type)/reference.info"/>
+    <param name="gaitCommandFile" value="$(find legged_controllers)/config/$(arg robot_type)/gait.info"/>
+
+    <rosparam file="$(find legged_controllers)/config/controllers.yaml" command="load"/>
+
+    <node unless="$(arg cheater)" name="controller_spawner" pkg="controller_manager" type="spawner"
+          output="screen" args="
+          controllers/joint_state_controller
+          controllers/legged_controller
+    "/>
+
+    <node if="$(arg cheater)" name="controller_spawner" pkg="controller_manager" type="spawner"
+          output="screen" args="
+          controllers/joint_state_controller
+          controllers/legged_controller
+          controllers/legged_cheater_controller
+    "/>
+
+    <node pkg="ocs2_legged_robot_ros" type="legged_robot_gait_command" name="legged_robot_gait_command"
+          output="screen"/>
+    <node pkg="legged_controllers" type="legged_target_trajectories_publisher" name="legged_robot_target"
+          output="screen"/>
+
+</launch>

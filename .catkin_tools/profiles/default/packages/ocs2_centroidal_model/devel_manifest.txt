@@ -1,0 +1,5 @@
+ocs2-main/ocs2_pinocchio/ocs2_centroidal_model
+/root/catkin_ws/devel/.private/ocs2_centroidal_model/lib/libocs2_centroidal_model.so /root/catkin_ws/devel/lib/libocs2_centroidal_model.so
+/root/catkin_ws/devel/.private/ocs2_centroidal_model/lib/pkgconfig/ocs2_centroidal_model.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_centroidal_model.pc
+/root/catkin_ws/devel/.private/ocs2_centroidal_model/share/ocs2_centroidal_model/cmake/ocs2_centroidal_modelConfig-version.cmake /root/catkin_ws/devel/share/ocs2_centroidal_model/cmake/ocs2_centroidal_modelConfig-version.cmake
+/root/catkin_ws/devel/.private/ocs2_centroidal_model/share/ocs2_centroidal_model/cmake/ocs2_centroidal_modelConfig.cmake /root/catkin_ws/devel/share/ocs2_centroidal_model/cmake/ocs2_centroidal_modelConfig.cmake

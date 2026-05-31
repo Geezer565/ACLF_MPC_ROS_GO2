@@ -1,0 +1,4 @@
+unitree_ros/robots/b2_description
+/root/catkin_ws/devel/.private/b2_description/lib/pkgconfig/b2_description.pc /root/catkin_ws/devel/lib/pkgconfig/b2_description.pc
+/root/catkin_ws/devel/.private/b2_description/share/b2_description/cmake/b2_descriptionConfig-version.cmake /root/catkin_ws/devel/share/b2_description/cmake/b2_descriptionConfig-version.cmake
+/root/catkin_ws/devel/.private/b2_description/share/b2_description/cmake/b2_descriptionConfig.cmake /root/catkin_ws/devel/share/b2_description/cmake/b2_descriptionConfig.cmake

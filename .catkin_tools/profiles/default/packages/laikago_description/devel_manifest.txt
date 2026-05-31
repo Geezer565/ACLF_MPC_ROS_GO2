@@ -1,0 +1,4 @@
+unitree_ros/robots/laikago_description
+/root/catkin_ws/devel/.private/laikago_description/lib/pkgconfig/laikago_description.pc /root/catkin_ws/devel/lib/pkgconfig/laikago_description.pc
+/root/catkin_ws/devel/.private/laikago_description/share/laikago_description/cmake/laikago_descriptionConfig-version.cmake /root/catkin_ws/devel/share/laikago_description/cmake/laikago_descriptionConfig-version.cmake
+/root/catkin_ws/devel/.private/laikago_description/share/laikago_description/cmake/laikago_descriptionConfig.cmake /root/catkin_ws/devel/share/laikago_description/cmake/laikago_descriptionConfig.cmake

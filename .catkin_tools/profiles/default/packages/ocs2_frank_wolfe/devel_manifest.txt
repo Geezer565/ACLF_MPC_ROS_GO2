@@ -1,0 +1,5 @@
+ocs2-main/ocs2_frank_wolfe
+/root/catkin_ws/devel/.private/ocs2_frank_wolfe/lib/libocs2_frank_wolfe.so /root/catkin_ws/devel/lib/libocs2_frank_wolfe.so
+/root/catkin_ws/devel/.private/ocs2_frank_wolfe/lib/pkgconfig/ocs2_frank_wolfe.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_frank_wolfe.pc
+/root/catkin_ws/devel/.private/ocs2_frank_wolfe/share/ocs2_frank_wolfe/cmake/ocs2_frank_wolfeConfig-version.cmake /root/catkin_ws/devel/share/ocs2_frank_wolfe/cmake/ocs2_frank_wolfeConfig-version.cmake
+/root/catkin_ws/devel/.private/ocs2_frank_wolfe/share/ocs2_frank_wolfe/cmake/ocs2_frank_wolfeConfig.cmake /root/catkin_ws/devel/share/ocs2_frank_wolfe/cmake/ocs2_frank_wolfeConfig.cmake

@@ -1,0 +1,26 @@
+authors: []
+blacklist:
+- "\n  ocs2_anymal_commands\n  ocs2_mobile_manipulator\n  ocs2_mobile_manipulator_ros\n\
+  \  segmented_planes_terrain_model\n  convex_plane_decomposition\n  ocs2_self_collision_visualization\n"
+- "\n  ocs2_raisim_core\n  ocs2_raisim\n  ocs2_raisim_ros\n"
+build_space: build
+catkin_make_args: []
+cmake_args:
+- -DCMAKE_BUILD_TYPE=RelWithDebInfo
+devel_layout: linked
+devel_space: devel
+extend_path: null
+extends: null
+install: false
+install_space: install
+isolate_install: false
+jobs_args: []
+licenses:
+- TODO
+log_space: logs
+maintainers: []
+make_args: []
+source_space: src
+use_env_cache: false
+use_internal_make_jobserver: true
+whitelist: []

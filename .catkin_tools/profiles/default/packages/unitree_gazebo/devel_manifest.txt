@@ -1,0 +1,6 @@
+unitree_ros/unitree_gazebo
+/root/catkin_ws/devel/.private/unitree_gazebo/lib/libunitreeDrawForcePlugin.so /root/catkin_ws/devel/lib/libunitreeDrawForcePlugin.so
+/root/catkin_ws/devel/.private/unitree_gazebo/lib/libunitreeFootContactPlugin.so /root/catkin_ws/devel/lib/libunitreeFootContactPlugin.so
+/root/catkin_ws/devel/.private/unitree_gazebo/lib/pkgconfig/unitree_gazebo.pc /root/catkin_ws/devel/lib/pkgconfig/unitree_gazebo.pc
+/root/catkin_ws/devel/.private/unitree_gazebo/share/unitree_gazebo/cmake/unitree_gazeboConfig-version.cmake /root/catkin_ws/devel/share/unitree_gazebo/cmake/unitree_gazeboConfig-version.cmake
+/root/catkin_ws/devel/.private/unitree_gazebo/share/unitree_gazebo/cmake/unitree_gazeboConfig.cmake /root/catkin_ws/devel/share/unitree_gazebo/cmake/unitree_gazeboConfig.cmake

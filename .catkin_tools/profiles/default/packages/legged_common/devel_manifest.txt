@@ -1,0 +1,4 @@
+leggedcontrol_go2/legged_common
+/root/catkin_ws/devel/.private/legged_common/lib/pkgconfig/legged_common.pc /root/catkin_ws/devel/lib/pkgconfig/legged_common.pc
+/root/catkin_ws/devel/.private/legged_common/share/legged_common/cmake/legged_commonConfig.cmake /root/catkin_ws/devel/share/legged_common/cmake/legged_commonConfig.cmake
+/root/catkin_ws/devel/.private/legged_common/share/legged_common/cmake/legged_commonConfig-version.cmake /root/catkin_ws/devel/share/legged_common/cmake/legged_commonConfig-version.cmake
