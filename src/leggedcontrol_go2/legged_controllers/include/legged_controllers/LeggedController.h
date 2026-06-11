@@ -18,6 +18,7 @@
 #include <legged_wbc/WbcBase.h>
 
 #include <ocs2_legged_robot/adaptive/AdaptiveParams.h>
+#include <legged_interface/adaptive/AdaptiveEstimatorBase.h>
 
 #include "legged_controllers/SafetyChecker.h"
 #include "legged_controllers/visualization/LeggedSelfCollisionVisualization.h"
@@ -68,8 +69,11 @@ class LeggedController : public controller_interface::MultiInterfaceController<H
 
   // ACLF-MPC: Adaptive parameter estimation
   bool useAclf_{false};
+  adaptive::AdaptiveEstimatorBase::Ptr estimatorPtr_;  // Unified estimator (strategy pattern)
   void updateAdaptiveParams(const vector_t& state, const vector_t& stateDes,
                             const ros::Duration& period);
+  void updateAdaptiveEstimator(const vector_t& state, const vector_t& stateDes,
+                               const ros::Duration& period);
 
   // Visualization
   std::shared_ptr<LeggedRobotVisualizer> robotVisualizer_;

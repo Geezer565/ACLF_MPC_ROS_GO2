@@ -32,6 +32,11 @@
 #include <ocs2_legged_robot/constraint/AdaptiveClfConstraint.h>
 #include <ocs2_legged_robot/adaptive/AdaptiveParams.h>
 
+// RBF adaptive estimator (Paper B VAN-MPC style)
+#include "legged_interface/adaptive/AdaptiveEstimatorLegacy.h"
+#include "legged_interface/adaptive/AdaptiveEstimatorRbf.h"
+#include "legged_interface/adaptive/RbfClfConstraint.h"
+
 // Forward-declare helper (implemented in separate .cpp to avoid include conflicts)
 namespace legged { namespace new_adaptive {
 struct DisturbanceEstimator;
@@ -232,6 +237,154 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
 
     if (verbose) {
       std::cerr << "[LeggedInterface] ACLF-MPC (new, 6D disturbance) enabled\n";
+    }
+  }
+
+  // ---- ACLF-MPC (RBF mode — Paper B VAN-MPC style) ----
+  if (adaptiveMode_ == "rbf") {
+    using namespace legged::adaptive;
+
+    // Build configs
+    RbfEstimatorConfig rbfCfg;
+    EstimatorConfig baseCfg;
+    RbfClfConfig softCfg;
+
+    // Load common CLF params (reuse existing acl.* config keys)
+    {
+      scalar_t lambdaGain = 5.0;
+      loadData::loadCppDataType(taskFile, "acl.lambdaGain", lambdaGain, verbose);
+      baseCfg.Lambda_l = matrix3_t::Identity() * lambdaGain;
+      baseCfg.Lambda_o = matrix3_t::Identity() * lambdaGain;
+
+      // Load KD diagonal
+      std::vector<scalar_t> kdVec(6, 50.0);
+      kdVec[3] = kdVec[4] = kdVec[5] = 80.0;
+      try {
+        boost::property_tree::ptree pt;
+        boost::property_tree::read_info(taskFile, pt);
+        for (int i = 0; i < 6; ++i) {
+          loadData::loadPtreeValue(pt, kdVec[i], "acl.KDDiag." + std::to_string(i), false);
+        }
+      } catch (...) {}
+      for (int i = 0; i < 6; ++i) baseCfg.KD_diag(i) = kdVec[i];
+
+      baseCfg.nominalMass = centroidalModelInfo_.robotMass;
+      baseCfg.nominalInertia = centroidalModelInfo_.robotInertia;
+    }
+
+    // Load RBF-specific params
+    {
+      try {
+        boost::property_tree::ptree pt;
+        boost::property_tree::read_info(taskFile, pt);
+        loadData::loadPtreeValue(pt, rbfCfg.nCenters, "rbf.nCenters", false);
+        loadData::loadPtreeValue(pt, rbfCfg.inputDim, "rbf.inputDim", false);
+        loadData::loadPtreeValue(pt, rbfCfg.rbfWidth, "rbf.rbfWidth", false);
+        loadData::loadPtreeValue(pt, rbfCfg.learningRateForce, "rbf.learningRateForce", false);
+        loadData::loadPtreeValue(pt, rbfCfg.learningRateTorque, "rbf.learningRateTorque", false);
+        loadData::loadPtreeValue(pt, rbfCfg.weightDecay, "rbf.weightDecay", false);
+        loadData::loadPtreeValue(pt, rbfCfg.maxForceEstimate, "rbf.maxForceEstimate", false);
+        loadData::loadPtreeValue(pt, rbfCfg.maxTorqueEstimate, "rbf.maxTorqueEstimate", false);
+        loadData::loadPtreeValue(pt, softCfg.clfWeight, "rbfSoftConstraint.clfWeight", false);
+        loadData::loadPtreeValue(pt, softCfg.mu, "rbfSoftConstraint.mu", false);
+        loadData::loadPtreeValue(pt, softCfg.delta, "rbfSoftConstraint.delta", false);
+      } catch (...) {
+        // Use built-in defaults
+      }
+    }
+
+    // Inherit base config into RBF config
+    static_cast<EstimatorConfig&>(rbfCfg) = baseCfg;
+
+    // Set RBF input bounds (12D: pos err, ori err, vel err, ang vel err)
+    rbfCfg.chiMin.resize(rbfCfg.inputDim);
+    rbfCfg.chiMax.resize(rbfCfg.inputDim);
+    rbfCfg.chiMin.setConstant(-1.0);
+    rbfCfg.chiMax.setConstant(1.0);
+
+    // Create RBF estimator
+    auto rbfEstimator = std::make_shared<AdaptiveEstimatorRbf>(rbfCfg);
+    estimatorPtr_ = rbfEstimator;
+
+    // Create and register RBF CLF soft constraint
+    auto rbfClfCost = createRbfClfSoftConstraint(
+        centroidalModelInfo_, rbfEstimator.get(), baseCfg, softCfg);
+
+    problemPtr_->softConstraintPtr->add("adaptiveCLF", std::move(rbfClfCost));
+
+    if (verbose) {
+      std::cerr << "[LeggedInterface] ACLF-MPC (RBF — Paper B VAN-MPC) enabled\n"
+                << "  RBF centers: " << rbfCfg.nCenters
+                << ", input dim: " << rbfCfg.inputDim
+                << ", lr_force: " << rbfCfg.learningRateForce
+                << ", lr_torque: " << rbfCfg.learningRateTorque << "\n";
+    }
+  }
+
+  // ---- ACLF-MPC (Legacy mode via strategy pattern) ----
+  if (adaptiveMode_ == "legacy") {
+    using namespace legged::adaptive;
+
+    LegacyEstimatorConfig legacyCfg;
+
+    // Load common CLF params
+    {
+      scalar_t lambdaGain = 5.0;
+      loadData::loadCppDataType(taskFile, "acl.lambdaGain", lambdaGain, verbose);
+      legacyCfg.Lambda_l = matrix3_t::Identity() * lambdaGain;
+      legacyCfg.Lambda_o = matrix3_t::Identity() * lambdaGain;
+
+      std::vector<scalar_t> kdVec(6, 50.0);
+      kdVec[3] = kdVec[4] = kdVec[5] = 80.0;
+      for (int i = 0; i < 6; ++i) legacyCfg.KD_diag(i) = kdVec[i];
+
+      legacyCfg.nominalMass = centroidalModelInfo_.robotMass;
+      legacyCfg.nominalInertia = centroidalModelInfo_.robotInertia;
+    }
+
+    // Load legacy-specific params
+    {
+      loadData::loadCppDataType(taskFile, "acl.gammaMass", legacyCfg.gammaMass, verbose);
+      loadData::loadCppDataType(taskFile, "acl.gammaCom", legacyCfg.gammaCom, verbose);
+      loadData::loadCppDataType(taskFile, "acl.gammaInertia", legacyCfg.gammaInertia, verbose);
+      loadData::loadCppDataType(taskFile, "acl.gammaWrench", legacyCfg.gammaWrench, verbose);
+    }
+
+    // Create legacy estimator
+    auto legacyEstimator = std::make_shared<AdaptiveEstimatorLegacy>(legacyCfg);
+    estimatorPtr_ = legacyEstimator;
+
+    // Also set up the old adaptiveParams_ for the OCS2 constraint
+    // (which reads the 16-param structure)
+    useAclf_ = true;
+    adaptiveParams_ = *legacyEstimator->getAdaptiveParamsPtr();
+
+    // Register legacy CLF constraint
+    AdaptiveClfConstraint::Config clfConfig;
+    clfConfig.Lambda_l = legacyCfg.Lambda_l;
+    clfConfig.Lambda_o = legacyCfg.Lambda_o;
+    clfConfig.KD_diag = legacyCfg.KD_diag;
+
+    scalar_t clfWeight = 10.0;
+    RelaxedBarrierPenalty::Config aclfBarrierConfig;
+    {
+      boost::property_tree::ptree pt;
+      boost::property_tree::read_info(taskFile, pt);
+      loadData::loadPtreeValue(pt, clfWeight, "aclSoftConstraint.clfWeight", verbose);
+      loadData::loadPtreeValue(pt, aclfBarrierConfig.mu, "aclSoftConstraint.mu", verbose);
+      loadData::loadPtreeValue(pt, aclfBarrierConfig.delta, "aclSoftConstraint.delta", verbose);
+    }
+
+    auto clfConstraint = std::make_unique<AdaptiveClfConstraint>(
+        *referenceManagerPtr_, clfConfig, centroidalModelInfo_,
+        legacyEstimator->getAdaptiveParamsPtr());
+    problemPtr_->softConstraintPtr->add("adaptiveCLF",
+        std::make_unique<StateInputSoftConstraint>(
+            std::move(clfConstraint),
+            std::make_unique<RelaxedBarrierPenalty>(aclfBarrierConfig)));
+
+    if (verbose) {
+      std::cerr << "[LeggedInterface] ACLF-MPC (Legacy via strategy pattern) enabled\n";
     }
   }
 

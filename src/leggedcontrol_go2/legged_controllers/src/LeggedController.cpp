@@ -77,8 +77,16 @@ bool LeggedController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHand
 
   // ACLF-MPC: Check if enabled (config loaded by LeggedInterface)
   loadData::loadCppDataType(taskFile, "legged_robot_interface.useAclf", useAclf_);
-  if (useAclf_) {
-    ROS_INFO_STREAM("[LeggedController] ACLF-MPC adaptive estimation enabled");
+
+  // Unified estimator (strategy pattern): supports "legacy" | "rbf" modes
+  const auto& mode = leggedInterface_->getAdaptiveMode();
+  if (mode == "legacy" || mode == "rbf") {
+    estimatorPtr_ = leggedInterface_->getAdaptiveEstimator();
+    if (estimatorPtr_) {
+      ROS_INFO_STREAM("[LeggedController] Adaptive estimator enabled: " << estimatorPtr_->getName());
+    }
+  } else if (useAclf_) {
+    ROS_INFO_STREAM("[LeggedController] ACLF-MPC adaptive estimation enabled (legacy raw path)");
   }
 
   return true;
@@ -126,7 +134,12 @@ void LeggedController::update(const ros::Time& time, const ros::Duration& period
   currentObservation_.input = optimizedInput;
 
   // ---- ACLF-MPC: Adaptive parameter update (Eq. 8) ----
-  if (useAclf_) {
+  // Strategy pattern: use unified estimator if available, else fall back to legacy raw path
+  if (estimatorPtr_) {
+    const auto& targetTrajectories = mpcMrtInterface_->getReferenceManager().getTargetTrajectories();
+    vector_t stateDes = targetTrajectories.getDesiredState(currentObservation_.time);
+    updateAdaptiveEstimator(currentObservation_.state, stateDes, period);
+  } else if (useAclf_) {
     const auto& targetTrajectories = mpcMrtInterface_->getReferenceManager().getTargetTrajectories();
     vector_t stateDes = targetTrajectories.getDesiredState(currentObservation_.time);
     updateAdaptiveParams(currentObservation_.state, stateDes, period);
@@ -281,6 +294,35 @@ void LeggedController::updateAdaptiveParams(const vector_t& state, const vector_
     ROS_INFO_STREAM("[ACLF] m_u=" << params.mass()
                      << " f=" << params.constantForce().transpose()
                      << " t=" << params.constantTorque().transpose());
+  }
+}
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+void LeggedController::updateAdaptiveEstimator(const vector_t& state, const vector_t& stateDes,
+                                                const ros::Duration& period) {
+  if (!estimatorPtr_) return;
+
+  const scalar_t dt = period.toSec();
+  if (dt <= 0.0) return;
+
+  // Delegate to the strategy-pattern estimator
+  estimatorPtr_->update(state, stateDes, dt);
+
+  // Get wrench estimate and push to WBC via LeggedInterface
+  auto output = estimatorPtr_->getOutput();
+  leggedInterface_->setAdaptiveWrench(output.adaptiveForce, output.adaptiveTorque);
+
+  // Periodic logging (every 1s)
+  static scalar_t logTimer = 0.0;
+  logTimer += dt;
+  if (logTimer > 1.0) {
+    logTimer = 0.0;
+    ROS_INFO_STREAM("[" << estimatorPtr_->getName() << "]"
+                    << " f=" << output.adaptiveForce.transpose()
+                    << " t=" << output.adaptiveTorque.transpose()
+                    << " |sigma|=" << output.sigma.norm());
   }
 }
 

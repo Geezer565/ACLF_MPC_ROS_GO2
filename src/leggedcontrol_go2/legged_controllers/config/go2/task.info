@@ -3,7 +3,8 @@ centroidalModelType             1      // 0: FullCentroidalDynamics, 1: Single R
 legged_robot_interface
 {
   verbose                               false  // show the loaded parameters
-  useAclf                               true   // Enable ACLF-MPC adaptive estimation
+  useAclf                               true   // Enable ACLF-MPC adaptive estimation (legacy raw path)
+  adaptiveMode                          "legacy"  // Adaptive mode: "off" | "legacy" (Paper A) | "rbf" (Paper B VAN-MPC) | "new" (6D disturbance)
 }
 
 ; ACLF-MPC Configuration (from Minniti et al. 2021)
@@ -32,6 +33,28 @@ aclSoftConstraint
   clfWeight      10.0      ; Weight for CLF constraint in cost
   mu             0.1       ; Relaxed barrier parameter
   delta          5.0       ; Relaxed barrier delta
+}
+
+; ── RBF Adaptive Estimator (Paper B VAN-MPC style) ─────────────────────
+; Active when legged_robot_interface.adaptiveMode = "rbf"
+rbf
+{
+  nCenters           21          ; Number of RBF centers (2m+1, m=10)
+  inputDim           12          ; Input feature dimension
+  rbfWidth           1.0         ; RBF kernel width (b_j)
+  learningRateForce  0.5         ; Force channel adaptation rate (Gamma_f)
+  learningRateTorque 0.1         ; Torque channel adaptation rate (Gamma_t)
+  weightDecay        1e-4        ; L2 regularization on weights
+  maxForceEstimate   200.0       ; Maximum force estimate (N)
+  maxTorqueEstimate  50.0        ; Maximum torque estimate (Nm)
+}
+
+; Soft constraint settings for RBF mode
+rbfSoftConstraint
+{
+  clfWeight      10.0            ; Weight for CLF constraint in cost
+  mu             0.1             ; Relaxed barrier parameter
+  delta          5.0             ; Relaxed barrier delta
 }
 
 model_settings

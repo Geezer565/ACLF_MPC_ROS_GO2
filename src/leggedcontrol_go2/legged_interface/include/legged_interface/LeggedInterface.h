@@ -22,6 +22,7 @@
 #include <ocs2_sqp/SqpSettings.h>
 
 #include "legged_interface/SwitchedModelReferenceManager.h"
+#include "legged_interface/adaptive/AdaptiveEstimatorBase.h"
 #include <ocs2_legged_robot/adaptive/AdaptiveParams.h>
 
 // Forward-declare to avoid include conflicts (implemented in AdaptiveNewHelper.cpp)
@@ -67,6 +68,12 @@ class LeggedInterface : public RobotInterface {
   bool isAclfEnabled() const { return useAclf_; }
   ocs2::legged_robot::adaptive::AdaptiveParams& getAdaptiveParams() { return adaptiveParams_; }
   const ocs2::legged_robot::adaptive::AdaptiveParams& getAdaptiveParams() const { return adaptiveParams_; }
+
+  // ── Unified adaptive estimator interface (strategy pattern) ──────────
+  // Supports three modes: "off" | "legacy" (Paper A) | "rbf" (Paper B)
+  adaptive::AdaptiveEstimatorBase::Ptr getAdaptiveEstimator() { return estimatorPtr_; }
+  adaptive::AdaptiveEstimatorBase::ConstPtr getAdaptiveEstimator() const { return estimatorPtr_; }
+  const std::string& getAdaptiveMode() const { return adaptiveMode_; }
 
  protected:
   virtual void setupModel(const std::string& taskFile, const std::string& urdfFile, const std::string& referenceFile, bool verbose);
@@ -115,8 +122,12 @@ class LeggedInterface : public RobotInterface {
   bool useAclf_{false};
   ocs2::legged_robot::adaptive::AdaptiveParams adaptiveParams_;
 
-  // ACLF-MPC (new, 6D disturbance version)
-  std::string adaptiveMode_{"off"};  // "off" | "old" | "new"
+  // ACLF-MPC unified estimator (strategy pattern)
+  // Set based on adaptiveMode_: "off"=nullptr, "legacy"=Legacy, "rbf"=RBF
+  adaptive::AdaptiveEstimatorBase::Ptr estimatorPtr_;
+
+  // ACLF-MPC (new, 6D disturbance version, legacy path)
+  std::string adaptiveMode_{"off"};  // "off" | "old" | "new" | "legacy" | "rbf"
   std::shared_ptr<legged::new_adaptive::DisturbanceEstimator> newEstimatorPtr_;
 };
 

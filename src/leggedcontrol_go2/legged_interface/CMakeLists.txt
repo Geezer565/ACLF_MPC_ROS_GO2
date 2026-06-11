@@ -60,6 +60,11 @@ add_library(${PROJECT_NAME}
         src/LeggedRobotPreComputation.cpp
         src/LeggedInterface.cpp
         src/AdaptiveNewHelper.cpp
+        # Adaptive estimators (strategy pattern for ACLF-MPC)
+        src/adaptive/AdaptiveEstimatorBase.cpp
+        src/adaptive/AdaptiveEstimatorLegacy.cpp
+        src/adaptive/AdaptiveEstimatorRbf.cpp
+        src/adaptive/RbfClfConstraint.cpp
         )
 
 target_link_libraries(${PROJECT_NAME}
