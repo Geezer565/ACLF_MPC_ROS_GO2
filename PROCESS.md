@@ -2,7 +2,7 @@
 
 > 项目: Go2 四足机器人 ACLF-MPC → VAN-MPC 迁移
 > 开始日期: 2026-06-10
-> 当前状态: **Phase 0 — 方案设计完成，待开始代码实现**
+> 当前状态: **Phase 1 — 双模式架构已实现，待编译测试**
 
 ---
 
@@ -40,6 +40,71 @@
 **下一步**:
 - Phase 1: 实现 Dual-RBFNN 自适应估计器，替换 Y_u 回归矩阵
 - 需确认: 新版 ocs2_legged_robot_adaptive 是否可作为更好的修改基础（比旧版嵌入式的耦合更少）
+
+---
+
+### 2026-06-11 — 双模式共存架构实现
+
+**目标**: 封装旧版 ACLF 代码，设计策略模式支持三种模式切换（off / legacy / rbf），确保新旧代码可以对比实验。
+
+**已完成**:
+
+1. **Git 保存与分支**:
+   - `main` 分支: commit `e4e082a` 保存迁移前快照
+   - 创建 `feature/van-mpc-migration` 分支
+   - commit `5a1615c`: 双模式架构实现 (14 files, +1370 lines)
+
+2. **新增 9 个文件** (策略模式架构):
+   - `AdaptiveEstimatorBase.h/.cpp` — 抽象接口 + computeCompositeError 共用实现
+   - `AdaptiveEstimatorLegacy.h/.cpp` — 包装现有 16 参数 Slotine-Li 代码
+   - `AdaptiveEstimatorRbf.h/.cpp` — Dual-RBFNN 在线学习骨架
+   - `RbfClfConstraint.h/.cpp` — 使用 RBFNN wrench 估计的 OCS2 CLF 约束
+
+3. **修改 5 个文件**:
+   - `LeggedInterface.h/.cpp` — 添加 estimatorPtr_ + 三种模式 setup ("off"/"legacy"/"rbf")
+   - `LeggedController.h/.cpp` — updateAdaptiveEstimator() 统一入口，向后兼容旧 useAclf_ 路径
+   - `task.info` — 添加 adaptiveMode 选项 + rbf/rbfSoftConstraint 配置段
+   - `CMakeLists.txt` — 添加新的 adaptive/ 源文件
+
+4. **架构设计要点**:
+   - 策略模式: `AdaptiveEstimatorBase` → `Legacy` / `Rbf` 两种实现
+   - 统一接口: `update()` → `getOutput()` → WBC 补偿
+   - 约束分离: Legacy 用旧 `AdaptiveClfConstraint`，RBF 用新 `RbfClfConstraint`
+   - 向后兼容: `useAclf_=true` 原始路径保留，`adaptiveMode_` 新路径优先
+
+5. **配置切换方法**:
+   ```ini
+   # task.info — 三种模式:
+   adaptiveMode  "off"      # 原始名义 MPC
+   adaptiveMode  "legacy"   # 论文 A: 16参数 Slotine-Li (封装版)
+   adaptiveMode  "rbf"      # 论文 B: Dual-RBFNN (新增)
+   ```
+
+**待做**:
+- 编译验证 (`catkin build legged_interface legged_controllers`)
+- 修复编译错误 (预计: 命名空间、头文件路径、API 不匹配)
+- 仿真测试: 三种模式切换 + 性能对比
+- 记录性能基准数据
+
+**关键决策**:
+
+### 决策 1 (已确定): 修改基础 — 使用旧版 ACLF 代码封装
+
+**结论**: 采用选项 A — 基于旧版 ACLF (ocs2_legged_robot/adaptive/) 代码封装。
+
+**理由**:
+- 旧版已集成在 legged_interface/legged_controllers 中，可直接运行
+- 新版 ocs2_legged_robot_adaptive 尚未接入 Go2 (需额外工作)
+- 封装方式 (AdaptiveEstimatorLegacy wrapper) 不影响旧代码，零风险
+- 后续可逐步迁移到新版独立包
+
+### 决策 2 (已确定): 复合误差 γ 初值
+
+**结论**: Phase 1 使用纯 σ (γ=0)，Phase 2 引入复合误差 E_c。
+
+### 决策 3 (已确定): RBF 基函数数量 m
+
+**结论**: m=10 (21 centers), inputDim=12。待实验调优。
 
 ---
 
@@ -89,6 +154,15 @@
 
 ---
 
+## Git 分支
+
+| 分支 | 说明 |
+|------|------|
+| `main` | 原始代码 (e4e082a 快照) |
+| `feature/van-mpc-migration` | **当前工作分支** (5a1615c 双模式架构) |
+
+---
+
 ## 文件变更记录
 
 | 日期 | 文件 | 操作 | 说明 |
@@ -97,6 +171,20 @@
 | 2026-06-10 | `PROCESS.md` | 新建 | 本文件 |
 | 2026-06-10 | `.paper1_ACLF_MPC_Quadruped.txt` | 新建 | 论文 A 全文文本 |
 | 2026-06-10 | `.paper2_VAN_MPC_Spherical.txt` | 新建 | 论文 B 全文文本 |
+| 2026-06-11 | `legged_interface/.../adaptive/AdaptiveEstimatorBase.h` | 新建 | 抽象估计器接口 |
+| 2026-06-11 | `legged_interface/.../adaptive/AdaptiveEstimatorLegacy.h` | 新建 | Legacy 估计器 (16参数) |
+| 2026-06-11 | `legged_interface/.../adaptive/AdaptiveEstimatorRbf.h` | 新建 | RBF 估计器 (Dual-RBFNN) |
+| 2026-06-11 | `legged_interface/.../adaptive/RbfClfConstraint.h` | 新建 | RBF CLF 约束 (OCS2) |
+| 2026-06-11 | `legged_interface/src/adaptive/AdaptiveEstimatorBase.cpp` | 新建 | computeCompositeError 实现 |
+| 2026-06-11 | `legged_interface/src/adaptive/AdaptiveEstimatorLegacy.cpp` | 新建 | Legacy 估计器实现 |
+| 2026-06-11 | `legged_interface/src/adaptive/AdaptiveEstimatorRbf.cpp` | 新建 | RBFNN 前向+权值更新 |
+| 2026-06-11 | `legged_interface/src/adaptive/RbfClfConstraint.cpp` | 新建 | RBF CLF 约束实现 |
+| 2026-06-11 | `legged_interface/include/.../LeggedInterface.h` | 修改 | +estimatorPtr_ +getAdaptiveEstimator |
+| 2026-06-11 | `legged_interface/src/LeggedInterface.cpp` | 修改 | +rbf/legacy mode setup |
+| 2026-06-11 | `legged_controllers/.../LeggedController.h` | 修改 | +estimatorPtr_ +updateAdaptiveEstimator |
+| 2026-06-11 | `legged_controllers/src/LeggedController.cpp` | 修改 | +策略模式分支 +updateAdaptiveEstimator |
+| 2026-06-11 | `legged_interface/CMakeLists.txt` | 修改 | +4 个 adaptive/ 源文件 |
+| 2026-06-11 | `legged_controllers/config/go2/task.info` | 修改 | +adaptiveMode +rbf 配置段 |
 
 ---
 
