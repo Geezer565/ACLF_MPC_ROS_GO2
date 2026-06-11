@@ -1,20 +1,22 @@
-# ROS build artifacts
+# Embedded git repos (use as submodules or build externally)
+src/hpp-fcl/
+src/ocs2-main/
+src/ocs2_robotic_assets/
+src/pinocchio/
+
+# Build artifacts
 build/
 devel/
 logs/
+install/
 
 # IDE
 .vscode/
 .idea/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
+*.swp
+*.swo
+*~
 
 # OS
 .DS_Store
 Thumbs.db
-
-# ROS bag files (usually large)
-*.bag

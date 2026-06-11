@@ -29,8 +29,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "legged_interface/SwitchedModelReferenceManager.h"
 
-namespace ocs2 {
-namespace legged_robot {
+namespace legged {
+namespace legged_robot_ref {
 
 /******************************************************************************************************/
 /******************************************************************************************************/
@@ -68,5 +68,5 @@ void SwitchedModelReferenceManager::modifyReferences(scalar_t initTime, scalar_t
   swingTrajectoryPtr_->update(modeSchedule, terrainHeight);
 }
 
-}  // namespace legged_robot
-}  // namespace ocs2
+}  // namespace legged_robot_ref
+}  // namespace legged

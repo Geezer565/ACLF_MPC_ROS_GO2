@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace legged {
 using namespace ocs2;
-using namespace legged_robot;
+using namespace ocs2::legged_robot;
 namespace swing_planner {
 
 class SwingTrajectoryPlanner {
