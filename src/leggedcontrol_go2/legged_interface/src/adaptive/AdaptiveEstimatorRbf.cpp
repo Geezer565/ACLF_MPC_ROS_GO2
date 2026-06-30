@@ -6,8 +6,6 @@
 
 #include "legged_interface/adaptive/AdaptiveEstimatorRbf.h"
 
-#include <ocs2_core/math/MatrixOperations.h>
-
 #include <algorithm>
 #include <cmath>
 #include <random>
@@ -120,19 +118,19 @@ ocs2::vector_t AdaptiveEstimatorRbf::computeActivations(
 }
 
 // ── Forward Pass ───────────────────────────────────────────────────────────
-ocs2::vector6_t AdaptiveEstimatorRbf::forward(
-    const ocs2::vector_t& chi) const {
+vector6_t AdaptiveEstimatorRbf::forward(
+    const vector_t& chi) const {
 
-  const ocs2::vector_t h = computeActivations(chi);
+  const vector_t h = computeActivations(chi);
 
   // y = W * h  (6 x nCenters) * (nCenters x 1) = (6 x 1)
-  ocs2::vector6_t y = weights_ * h;
+  vector6_t y = weights_ * h;
 
   return y;
 }
 
 // ── Update Weights ─────────────────────────────────────────────────────────
-void AdaptiveEstimatorRbf::updateWeights(const ocs2::vector6_t& sigma,
+void AdaptiveEstimatorRbf::updateWeights(const vector6_t& sigma,
                                           const ocs2::vector_t& activations,
                                           ocs2::scalar_t dt) {
   if (dt <= 0.0) return;
@@ -176,7 +174,7 @@ void AdaptiveEstimatorRbf::update(const ocs2::vector_t& state,
   }
 
   // 1. Compute composite error sigma (6D)
-  const ocs2::vector6_t sigma = computeCompositeError(state, stateDes);
+  const vector6_t sigma = computeCompositeError(state, stateDes);
 
   // 2. Build input features chi
   const ocs2::vector_t chi = buildInputFeatures(state, stateDes);

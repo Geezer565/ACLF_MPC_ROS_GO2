@@ -2,12 +2,14 @@
 // Does NOT include ocs2_legged_robot_adaptive headers to avoid
 // namespace conflicts with legged_interface's own types.
 //
+#include <ocs2_core/cost/QuadraticStateInputCost.h>
 // Implements:
 //   1. AdaptiveDisturbanceEstimator: d̂ -= Γ·σ·dt
 //   2. AdaptiveClfConstraint: h = ε - σᵀd̂ - c·‖σ‖² ≥ 0
 //   3. AdaptiveInputBiasCost: distribute f_ext to stance feet
 
 #include <ocs2_core/Types.h>
+#include <ocs2_oc/oc_problem/OptimalControlProblem.h>
 #include <ocs2_core/constraint/StateInputConstraint.h>
 #include <ocs2_core/soft_constraint/StateInputSoftConstraint.h>
 #include <ocs2_core/penalties/Penalties.h>

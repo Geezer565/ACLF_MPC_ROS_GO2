@@ -41,22 +41,22 @@ struct RbfEstimatorConfig : public EstimatorConfig {
   // ── RBFNN architecture ─────────────────────────────────────────────
   int nCenters{21};            // Number of RBF centers (2m+1, m=10)
   int inputDim{12};            // Input feature dimension
-  ocs2::scalar_t rbfWidth{1.0}; // RBF kernel width (b_j)
+  scalar_t rbfWidth{1.0}; // RBF kernel width (b_j)
 
   // ── Adaptation gains (fixed for Phase 1, variable for Phase 3) ────
-  ocs2::scalar_t learningRateForce{0.5};   // Force channel learning rate
-  ocs2::scalar_t learningRateTorque{0.1};  // Torque channel learning rate
+  scalar_t learningRateForce{0.5};   // Force channel learning rate
+  scalar_t learningRateTorque{0.1};  // Torque channel learning rate
 
   // ── Weight regularization ──────────────────────────────────────────
-  ocs2::scalar_t weightDecay{1e-4};  // L2 regularization on weights
+  scalar_t weightDecay{1e-4};  // L2 regularization on weights
 
   // ── Clamping ───────────────────────────────────────────────────────
-  ocs2::scalar_t maxForceEstimate{200.0};   // N
-  ocs2::scalar_t maxTorqueEstimate{50.0};   // Nm
+  scalar_t maxForceEstimate{200.0};   // N
+  scalar_t maxTorqueEstimate{50.0};   // Nm
 
   // ── State space bounds for center initialization ───────────────────
-  ocs2::vector_t chiMin;   // Lower bound for each input dimension
-  ocs2::vector_t chiMax;   // Upper bound for each input dimension
+  vector_t chiMin;   // Lower bound for each input dimension
+  vector_t chiMax;   // Upper bound for each input dimension
 };
 
 /**
@@ -74,15 +74,15 @@ class AdaptiveEstimatorRbf : public AdaptiveEstimatorBase {
   explicit AdaptiveEstimatorRbf(const RbfEstimatorConfig& config);
   ~AdaptiveEstimatorRbf() override = default;
 
-  void update(const ocs2::vector_t& state, const ocs2::vector_t& stateDes,
-              ocs2::scalar_t dt) override;
+  void update(const vector_t& state, const vector_t& stateDes,
+              scalar_t dt) override;
 
   EstimatorOutput getOutput() const override;
   void reset() override;
   std::string getName() const override { return "RBF (Paper B — Dual-RBFNN)"; }
 
   /// Get the current 6D wrench estimate (for CLF constraint in MPC)
-  ocs2::vector6_t getWrenchEstimate() const { return wrenchEstimate_; }
+  vector6_t getWrenchEstimate() const { return wrenchEstimate_; }
 
   /// Get RBFNN config
   const RbfEstimatorConfig& getRbfConfig() const { return rbfConfig_; }
@@ -90,43 +90,33 @@ class AdaptiveEstimatorRbf : public AdaptiveEstimatorBase {
  private:
   /**
    * Build input feature vector chi from state.
-   *
-   * chi includes:
-   *   [0-2]   position error p_tilde
-   *   [3-5]   orientation error (Euler angles)
-   *   [6-8]   linear velocity error v_tilde
-   *   [9-11]  angular velocity error omega_tilde
-   *
-   * Normalized to [-1, 1] range using chiMin/chiMax.
    */
-  ocs2::vector_t buildInputFeatures(const ocs2::vector_t& state,
-                                     const ocs2::vector_t& stateDes) const;
+  vector_t buildInputFeatures(const vector_t& state,
+                               const vector_t& stateDes) const;
 
   /**
    * Forward pass: chi -> wrench estimate.
-   * y = W * h(chi) where h_j = exp(-||chi - c_j||^2 / b_j^2)
    */
-  ocs2::vector6_t forward(const ocs2::vector_t& chi) const;
+  vector6_t forward(const vector_t& chi) const;
 
   /**
    * Compute RBF activations h(chi).
    */
-  ocs2::vector_t computeActivations(const ocs2::vector_t& chi) const;
+  vector_t computeActivations(const vector_t& chi) const;
 
   /**
    * Update RBFNN weights using gradient descent.
-   * dW/dt = -gamma * sigma * h^T - weightDecay * W
    */
-  void updateWeights(const ocs2::vector6_t& sigma,
-                     const ocs2::vector_t& activations, ocs2::scalar_t dt);
+  void updateWeights(const vector6_t& sigma,
+                     const vector_t& activations, scalar_t dt);
 
   RbfEstimatorConfig rbfConfig_;
 
   // ── RBFNN parameters ───────────────────────────────────────────────
-  ocs2::matrix_t centers_;     // [inputDim x nCenters] RBF center vectors
-  ocs2::vector_t widths_;      // [nCenters] kernel widths
-  ocs2::matrix_t weights_;     // [6 x nCenters] output weights
-  ocs2::vector6_t wrenchEstimate_;  // Latest wrench output
+  matrix_t centers_;     // [inputDim x nCenters] RBF center vectors
+  vector_t widths_;      // [nCenters] kernel widths
+  matrix_t weights_;     // [6 x nCenters] output weights
+  vector6_t wrenchEstimate_;  // Latest wrench output
 
   // ── Internal state ─────────────────────────────────────────────────
   EstimatorOutput lastOutput_;

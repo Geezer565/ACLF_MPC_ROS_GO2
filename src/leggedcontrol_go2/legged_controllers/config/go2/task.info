@@ -3,8 +3,8 @@ centroidalModelType             1      // 0: FullCentroidalDynamics, 1: Single R
 legged_robot_interface
 {
   verbose                               false  // show the loaded parameters
-  useAclf                               true   // Enable ACLF-MPC adaptive estimation (legacy raw path)
-  adaptiveMode                          "legacy"  // Adaptive mode: "off" | "legacy" (Paper A) | "rbf" (Paper B VAN-MPC) | "new" (6D disturbance)
+  useAclf                               false  // Enable ACLF-MPC adaptive estimation (legacy raw path)
+  adaptiveMode                          "rbf"   // Adaptive mode: "off" | "legacy" (Paper A) | "rbf" (Paper B VAN-MPC) | "new" (6D disturbance)
 }
 
 ; ACLF-MPC Configuration (from Minniti et al. 2021)

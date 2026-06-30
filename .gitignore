@@ -23,3 +23,12 @@ Thumbs.db
 
 # Data files
 *.bag
+
+# Gazebo simulation outputs
+gazebo_results/
+
+# PDFs (text versions in .txt)
+*.pdf
+
+# Scripts generated data
+scripts/*.bag

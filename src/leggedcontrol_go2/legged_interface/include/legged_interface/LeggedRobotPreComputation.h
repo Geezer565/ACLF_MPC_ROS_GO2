@@ -49,7 +49,7 @@ namespace legged_robot {
 class LeggedRobotPreComputation : public PreComputation {
  public:
   LeggedRobotPreComputation(PinocchioInterface pinocchioInterface, CentroidalModelInfo info,
-                            const SwingTrajectoryPlanner& swingTrajectoryPlanner, ModelSettings settings);
+                            const ::legged::swing_planner::SwingTrajectoryPlanner& swingTrajectoryPlanner, ModelSettings settings);
   ~LeggedRobotPreComputation() override = default;
 
   LeggedRobotPreComputation* clone() const override { return new LeggedRobotPreComputation(*this); }
@@ -75,7 +75,7 @@ class LeggedRobotPreComputation : public PreComputation {
  private:
   PinocchioInterface pinocchioInterface_;
   CentroidalModelInfo info_;
-  const SwingTrajectoryPlanner* swingTrajectoryPlannerPtr_;
+  const ::legged::swing_planner::SwingTrajectoryPlanner* swingTrajectoryPlannerPtr_;
   std::unique_ptr<CentroidalModelPinocchioMapping> mappingPtr_;
   const ModelSettings settings_;
 

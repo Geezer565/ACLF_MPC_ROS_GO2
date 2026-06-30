@@ -29,7 +29,12 @@
 #include <ocs2_pinocchio_interface/PinocchioEndEffectorKinematicsCppAd.h>
 
 #include <ocs2_legged_robot/dynamics/LeggedRobotDynamicsAD.h>
-#include <ocs2_legged_robot/constraint/AdaptiveClfConstraint.h>
+// NOTE: ocs2_legged_robot/constraint/AdaptiveClfConstraint.h transitively includes
+//       ocs2_legged_robot/reference_manager/SwitchedModelReferenceManager.h which
+//       conflicts with legged_interface/SwitchedModelReferenceManager.h (same class
+//       in same namespace, local version adds getSwingTrajectoryPlanner).
+//       The useAclf_ and "legacy" paths are conditionally compiled below.
+// #include <ocs2_legged_robot/constraint/AdaptiveClfConstraint.h>
 #include <ocs2_legged_robot/adaptive/AdaptiveParams.h>
 
 // RBF adaptive estimator (Paper B VAN-MPC style)
@@ -38,6 +43,9 @@
 #include "legged_interface/adaptive/RbfClfConstraint.h"
 
 // Forward-declare helper (implemented in separate .cpp to avoid include conflicts)
+// DISABLED: DisturbanceEstimator and AdaptiveClf require full type for
+// nested Config access. The "new" adaptive mode is experimental.
+#if 0
 namespace legged { namespace new_adaptive {
 struct DisturbanceEstimator;
 class AdaptiveClf;
@@ -52,6 +60,7 @@ void setupNewAdaptive(
     ocs2::scalar_t inputBiasWeight,
     bool useSoft);
 }}
+#endif
 
 // Boost
 #include <boost/filesystem/operations.hpp>
@@ -149,13 +158,14 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
   problemPtr_->stateSoftConstraintPtr->add("selfCollision",
                                            getSelfCollisionConstraint(*pinocchioInterfacePtr_, taskFile, "selfCollision", verbose));
 
-  // ---- ACLF-MPC: Adaptive CLF constraint ----
+  // ---- ACLF-MPC: Adaptive CLF constraint (DISABLED - namespace conflict) ----
+#if 0
   loadData::loadCppDataType(taskFile, "legged_robot_interface.useAclf", useAclf_);
   if (useAclf_) {
     using namespace ocs2::legged_robot::adaptive;
 
     scalar_t lambdaGain = 5.0;
-    loadData::loadCppDataType(taskFile, "acl.lambdaGain", lambdaGain, verbose);
+    loadData::loadCppDataType(taskFile, "acl.lambdaGain", lambdaGain);
     adaptiveParams_.Lambda_l = matrix3_t::Identity() * lambdaGain;
     adaptiveParams_.Lambda_o = matrix3_t::Identity() * lambdaGain;
 
@@ -198,9 +208,21 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
       std::cerr << "[LeggedInterface] ACLF-MPC enabled\n";
     }
   }
+#endif
 
-  // ---- ACLF-MPC (new, 6D disturbance version) ----
-  loadData::loadCppDataType(taskFile, "legged_robot_interface.adaptiveMode", adaptiveMode_, verbose);
+  // ---- ACLF-MPC (new, 6D disturbance version) [DISABLED - experimental] ----
+  // adaptiveMode_ is std::string; loadCppDataType doesn't support strings.
+  // Use boost ptree or default to "rbf" for now.
+  {
+    try {
+      boost::property_tree::ptree pt;
+      boost::property_tree::read_info(taskFile, pt);
+      adaptiveMode_ = pt.get<std::string>("legged_robot_interface.adaptiveMode", "off");
+    } catch (...) {
+      adaptiveMode_ = "off";
+    }
+  }
+#if 0
   if (adaptiveMode_ == "new") {
     using namespace legged::new_adaptive;
 
@@ -239,6 +261,7 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
       std::cerr << "[LeggedInterface] ACLF-MPC (new, 6D disturbance) enabled\n";
     }
   }
+#endif
 
   // ---- ACLF-MPC (RBF mode — Paper B VAN-MPC style) ----
   if (adaptiveMode_ == "rbf") {
@@ -251,13 +274,13 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
 
     // Load common CLF params (reuse existing acl.* config keys)
     {
-      scalar_t lambdaGain = 5.0;
-      loadData::loadCppDataType(taskFile, "acl.lambdaGain", lambdaGain, verbose);
+      double lambdaGain = 5.0;
+      loadData::loadCppDataType(taskFile, "acl.lambdaGain", lambdaGain);
       baseCfg.Lambda_l = matrix3_t::Identity() * lambdaGain;
       baseCfg.Lambda_o = matrix3_t::Identity() * lambdaGain;
 
       // Load KD diagonal
-      std::vector<scalar_t> kdVec(6, 50.0);
+      std::vector<double> kdVec(6, 50.0);
       kdVec[3] = kdVec[4] = kdVec[5] = 80.0;
       try {
         boost::property_tree::ptree pt;
@@ -269,7 +292,7 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
       for (int i = 0; i < 6; ++i) baseCfg.KD_diag(i) = kdVec[i];
 
       baseCfg.nominalMass = centroidalModelInfo_.robotMass;
-      baseCfg.nominalInertia = centroidalModelInfo_.robotInertia;
+      baseCfg.nominalInertia = centroidalModelInfo_.centroidalInertiaNominal;
     }
 
     // Load RBF-specific params
@@ -321,7 +344,8 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
     }
   }
 
-  // ---- ACLF-MPC (Legacy mode via strategy pattern) ----
+  // ---- ACLF-MPC (Legacy mode via strategy pattern) [DISABLED - namespace conflict] ----
+#if 0
   if (adaptiveMode_ == "legacy") {
     using namespace legged::adaptive;
 
@@ -330,7 +354,7 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
     // Load common CLF params
     {
       scalar_t lambdaGain = 5.0;
-      loadData::loadCppDataType(taskFile, "acl.lambdaGain", lambdaGain, verbose);
+      loadData::loadCppDataType(taskFile, "acl.lambdaGain", lambdaGain);
       legacyCfg.Lambda_l = matrix3_t::Identity() * lambdaGain;
       legacyCfg.Lambda_o = matrix3_t::Identity() * lambdaGain;
 
@@ -387,6 +411,7 @@ void LeggedInterface::setupOptimalControlProblem(const std::string& taskFile, co
       std::cerr << "[LeggedInterface] ACLF-MPC (Legacy via strategy pattern) enabled\n";
     }
   }
+#endif
 
   setupPreComputation(taskFile, urdfFile, referenceFile, verbose);
 
@@ -420,7 +445,7 @@ void LeggedInterface::setupModel(const std::string& taskFile, const std::string&
 void LeggedInterface::setupReferenceManager(const std::string& taskFile, const std::string& urdfFile, const std::string& referenceFile,
                                             bool verbose) {
   auto swingTrajectoryPlanner =
-      std::make_unique<SwingTrajectoryPlanner>(loadSwingTrajectorySettings(taskFile, "swing_trajectory_config", verbose), 4);
+      std::make_unique<legged::swing_planner::SwingTrajectoryPlanner>(legged::swing_planner::loadSwingTrajectorySettings(taskFile, "swing_trajectory_config", verbose), 4);
   referenceManagerPtr_ =
       std::make_shared<SwitchedModelReferenceManager>(loadGaitSchedule(referenceFile, verbose), std::move(swingTrajectoryPlanner));
 }

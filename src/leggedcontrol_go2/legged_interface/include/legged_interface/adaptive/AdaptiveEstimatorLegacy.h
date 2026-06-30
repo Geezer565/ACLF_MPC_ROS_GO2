@@ -33,10 +33,10 @@ namespace adaptive {
  */
 struct LegacyEstimatorConfig : public EstimatorConfig {
   // Adaptation gains (diagonal of 16x16 Gamma matrix)
-  ocs2::scalar_t gammaMass{5.0};       // Payload mass adaptation gain
-  ocs2::scalar_t gammaCom{1.0};        // CoM offset adaptation gain
-  ocs2::scalar_t gammaInertia{0.01};   // Inertia adaptation gain
-  ocs2::scalar_t gammaWrench{0.1};     // Constant wrench adaptation gain
+  scalar_t gammaMass{5.0};       // Payload mass adaptation gain
+  scalar_t gammaCom{1.0};        // CoM offset adaptation gain
+  scalar_t gammaInertia{0.01};   // Inertia adaptation gain
+  scalar_t gammaWrench{0.1};     // Constant wrench adaptation gain
 };
 
 /**
@@ -56,8 +56,8 @@ class AdaptiveEstimatorLegacy : public AdaptiveEstimatorBase {
   explicit AdaptiveEstimatorLegacy(const LegacyEstimatorConfig& config);
   ~AdaptiveEstimatorLegacy() override;
 
-  void update(const ocs2::vector_t& state, const ocs2::vector_t& stateDes,
-              ocs2::scalar_t dt) override;
+  void update(const vector_t& state, const vector_t& stateDes,
+              scalar_t dt) override;
 
   EstimatorOutput getOutput() const override;
   void reset() override;

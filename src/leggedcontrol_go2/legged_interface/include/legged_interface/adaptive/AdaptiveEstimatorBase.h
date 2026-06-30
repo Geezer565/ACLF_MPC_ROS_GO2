@@ -16,31 +16,40 @@
 
 #pragma once
 
+#include <memory>
+
 #include <ocs2_core/Types.h>
-#include <ocs2_core/reference/TargetTrajectories.h>
 
 namespace legged {
 namespace adaptive {
+
+// Type aliases (ocs2::scalar_t == double)
+using scalar_t = ocs2::scalar_t;
+using vector3_t = Eigen::Matrix<scalar_t, 3, 1>;
+using vector6_t = Eigen::Matrix<scalar_t, 6, 1>;
+using matrix3_t = Eigen::Matrix<scalar_t, 3, 3>;
+using vector_t = ocs2::vector_t;
+using matrix_t = ocs2::matrix_t;
 
 /**
  * Configuration common to all adaptive estimators.
  */
 struct EstimatorConfig {
   // Sliding surface gains: sigma = v_tilde + Lambda * p_tilde
-  ocs2::matrix3_t Lambda_l{ocs2::matrix3_t::Identity() * 5.0};
-  ocs2::matrix3_t Lambda_o{ocs2::matrix3_t::Identity() * 5.0};
+  matrix3_t Lambda_l{matrix3_t::Identity() * 5.0};
+  matrix3_t Lambda_o{matrix3_t::Identity() * 5.0};
 
   // CLF damping matrix (6x6 diagonal)
-  ocs2::vector6_t KD_diag{ocs2::vector6_t::Zero()};
+  vector6_t KD_diag{vector6_t::Zero()};
 
   // Gravity vector (world frame)
-  ocs2::vector3_t gravity{0.0, 0.0, -9.81};
+  vector3_t gravity{0.0, 0.0, -9.81};
 
   // Nominal robot mass (kg)
-  ocs2::scalar_t nominalMass{6.921};
+  scalar_t nominalMass{6.921};
 
   // Nominal robot inertia about CoM (base frame)
-  ocs2::matrix3_t nominalInertia{ocs2::matrix3_t::Identity()};
+  matrix3_t nominalInertia{matrix3_t::Identity()};
 };
 
 /**
@@ -50,16 +59,16 @@ struct EstimatorOutput {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
   /// Adaptive force in world frame (3D)
-  ocs2::vector3_t adaptiveForce{ocs2::vector3_t::Zero()};
+  vector3_t adaptiveForce{vector3_t::Zero()};
 
   /// Adaptive torque in base frame (3D)
-  ocs2::vector3_t adaptiveTorque{ocs2::vector3_t::Zero()};
+  vector3_t adaptiveTorque{vector3_t::Zero()};
 
   /// 6D composite error sigma = [sigma_l; sigma_o]
-  ocs2::vector6_t sigma{ocs2::vector6_t::Zero()};
+  vector6_t sigma{vector6_t::Zero()};
 
   /// Current CLF constraint value h_clf (for monitoring)
-  ocs2::scalar_t clfValue{0.0};
+  scalar_t clfValue{0.0};
 };
 
 /**
@@ -90,8 +99,8 @@ class AdaptiveEstimatorBase {
    * @param stateDes     Desired state (same layout as state)
    * @param dt           Time step since last update (seconds)
    */
-  virtual void update(const ocs2::vector_t& state,
-                      const ocs2::vector_t& stateDes, ocs2::scalar_t dt) = 0;
+  virtual void update(const vector_t& state,
+                      const vector_t& stateDes, scalar_t dt) = 0;
 
   /**
    * Get the current estimator output.
@@ -118,8 +127,8 @@ class AdaptiveEstimatorBase {
    * @param stateDes Desired state
    * @return         6D composite error [sigma_l; sigma_o]
    */
-  ocs2::vector6_t computeCompositeError(const ocs2::vector_t& state,
-                                         const ocs2::vector_t& stateDes) const;
+  vector6_t computeCompositeError(const vector_t& state,
+                                    const vector_t& stateDes) const;
 
  protected:
   EstimatorConfig config_;

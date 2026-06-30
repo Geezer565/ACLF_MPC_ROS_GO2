@@ -7,7 +7,6 @@
 
 #include "legged_interface/adaptive/AdaptiveEstimatorLegacy.h"
 
-#include <ocs2_core/math/MatrixOperations.h>
 #include <ocs2_legged_robot/adaptive/AdaptiveParams.h>
 
 #include <cmath>
@@ -16,12 +15,12 @@ namespace legged {
 namespace adaptive {
 
 // ── Helper: build 16x16 diagonal Gamma from scalar gains ──────────────────
-static ocs2::matrix_t buildGammaMatrix(ocs2::scalar_t gammaMass,
-                                        ocs2::scalar_t gammaCom,
-                                        ocs2::scalar_t gammaInertia,
-                                        ocs2::scalar_t gammaWrench) {
+static matrix_t buildGammaMatrix(scalar_t gammaMass,
+                                        scalar_t gammaCom,
+                                        scalar_t gammaInertia,
+                                        scalar_t gammaWrench) {
   constexpr int N = 16;
-  ocs2::matrix_t Gamma = ocs2::matrix_t::Zero(N, N);
+  matrix_t Gamma = matrix_t::Zero(N, N);
 
   // [0]   : mass
   Gamma(0, 0) = gammaMass;
@@ -81,7 +80,7 @@ void AdaptiveEstimatorLegacy::reset() {
 // ── Update ─────────────────────────────────────────────────────────────────
 void AdaptiveEstimatorLegacy::update(const ocs2::vector_t& state,
                                      const ocs2::vector_t& stateDes,
-                                     ocs2::scalar_t dt) {
+                                     scalar_t dt) {
   using namespace ocs2::legged_robot::adaptive;
 
   if (dt <= 0.0 || dt > 0.1) {
@@ -89,22 +88,22 @@ void AdaptiveEstimatorLegacy::update(const ocs2::vector_t& state,
   }
 
   // ── 1. Compute composite error sigma (6D) ─────────────────────────────
-  const ocs2::vector6_t sigma = computeCompositeError(state, stateDes);
+  const vector6_t sigma = computeCompositeError(state, stateDes);
 
   // ── 2. Extract current velocity and orientation from state ─────────────
   // State layout: [v_com(3), L/m(3)=angularMomentum/mass, p(3), euler(3)]
-  const ocs2::vector3_t omega = state.segment<3>(3);  // L/m ~= I*omega/m ~= omega for small I/m
+  const vector3_t omega = state.segment<3>(3);  // L/m ~= I*omega/m ~= omega for small I/m
   // Actually L/m is NOT omega. But the old code also uses this approximation.
   // For accurate computation we'd need I⁻¹ * L. We keep the old code's
   // behavior for consistency.
 
   // ── 3. Compute regressor matrix Yu (6x16) ──────────────────────────────
   // The old code sets v_dot_pr = 0 and omega_dot_r = 0 (no reference accel).
-  const ocs2::vector3_t v_dot_pr = ocs2::vector3_t::Zero();
-  const ocs2::vector3_t omega_dot_r = ocs2::vector3_t::Zero();
-  const ocs2::vector3_t omega_r = omega;  // reference ang vel = current (for simplicity)
+  const vector3_t v_dot_pr = vector3_t::Zero();
+  const vector3_t omega_dot_r = vector3_t::Zero();
+  const vector3_t omega_r = omega;  // reference ang vel = current (for simplicity)
 
-  const ocs2::matrix_t Yu = AdaptiveRegressor::computeRegressor(
+  const matrix_t Yu = AdaptiveRegressor::computeRegressor(
       v_dot_pr, omega, omega_dot_r, omega_r, config_.gravity);
 
   // ── 4. Update adaptive parameters ──────────────────────────────────────

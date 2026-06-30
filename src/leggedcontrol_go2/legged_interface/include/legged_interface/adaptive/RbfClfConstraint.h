@@ -34,9 +34,9 @@ namespace adaptive {
  * Configuration for the RBF CLF soft constraint.
  */
 struct RbfClfConfig {
-  ocs2::scalar_t clfWeight{10.0};   // Weight in MPC cost
-  ocs2::scalar_t mu{0.1};           // Relaxed barrier parameter
-  ocs2::scalar_t delta{5.0};        // Relaxed barrier delta
+  scalar_t clfWeight{10.0};   // Weight in MPC cost
+  scalar_t mu{0.1};           // Relaxed barrier parameter
+  scalar_t delta{5.0};        // Relaxed barrier delta
 };
 
 /**
@@ -65,50 +65,50 @@ class RbfClfConstraint final : public ocs2::StateInputConstraint {
 
   RbfClfConstraint* clone() const override { return new RbfClfConstraint(*this); }
 
-  ocs2::vector_t getValue(ocs2::scalar_t time, const ocs2::vector_t& state,
-                          const ocs2::vector_t& input,
+  vector_t getValue(scalar_t time, const vector_t& state,
+                          const vector_t& input,
                           const ocs2::PreComputation& preComp) const override;
 
   ocs2::VectorFunctionLinearApproximation getLinearApproximation(
-      ocs2::scalar_t time, const ocs2::vector_t& state,
-      const ocs2::vector_t& input,
+      scalar_t time, const vector_t& state,
+      const vector_t& input,
       const ocs2::PreComputation& preComp) const override;
 
   ocs2::VectorFunctionQuadraticApproximation getQuadraticApproximation(
-      ocs2::scalar_t time, const ocs2::vector_t& state,
-      const ocs2::vector_t& input,
+      scalar_t time, const vector_t& state,
+      const vector_t& input,
       const ocs2::PreComputation& preComp) const override;
 
-  size_t getNumConstraints(ocs2::scalar_t time) const override { return 1; }
+  size_t getNumConstraints(scalar_t time) const override { return 1; }
 
  private:
   /**
    * Compute composite error sigma = [v_tilde + Lambda_l*p_tilde;
    *                                    omega_tilde + Lambda_o*euler_tilde]
    */
-  ocs2::vector6_t computeCompositeError(ocs2::scalar_t time,
-                                         const ocs2::vector_t& state) const;
+  vector6_t computeCompositeError(scalar_t time,
+                                         const vector_t& state) const;
 
   /**
    * Compute the RHS vector (6D) of the CLF inequality.
    */
-  ocs2::vector6_t computeConstraintResidual(
-      ocs2::scalar_t time, const ocs2::vector_t& state,
-      const ocs2::vector_t& input) const;
+  vector6_t computeConstraintResidual(
+      scalar_t time, const vector_t& state,
+      const vector_t& input) const;
 
   const ocs2::CentroidalModelInfo info_;
   const AdaptiveEstimatorRbf* rbfEstimatorPtr_;  // Non-owning pointer
-  const ocs2::vector3_t gravity_;
+  const vector3_t gravity_;
 
   // Derived quantities
-  ocs2::matrix3_t Lambda_l_;
-  ocs2::matrix3_t Lambda_o_;
-  ocs2::matrix_t KD_;
-  ocs2::scalar_t mass_;
-  ocs2::matrix3_t inertiaInv_;
+  matrix3_t Lambda_l_;
+  matrix3_t Lambda_o_;
+  matrix_t KD_;
+  scalar_t mass_;
+  matrix3_t inertiaInv_;
 
   // Foot contact positions in base frame (nominal)
-  std::vector<ocs2::vector3_t> footPositionsBase_;
+  std::vector<vector3_t> footPositionsBase_;
 };
 
 /**
