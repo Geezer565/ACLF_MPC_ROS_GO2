@@ -1,0 +1,1 @@
+# Payload module — Configurable payload/weight for Go2 robot

@@ -1,0 +1,1 @@
+# Terrain Generator — Modular Gazebo terrain system for Go2 simulation
