@@ -29,14 +29,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "legged_interface/SwitchedModelReferenceManager.h"
 
-namespace ocs2 {
-namespace legged_robot {
+namespace legged {
+namespace go2_ref {
 
 /******************************************************************************************************/
 /******************************************************************************************************/
 /******************************************************************************************************/
 SwitchedModelReferenceManager::SwitchedModelReferenceManager(std::shared_ptr<GaitSchedule> gaitSchedulePtr,
-                                                             std::shared_ptr<::legged::swing_planner::SwingTrajectoryPlanner> swingTrajectoryPtr)
+                                                             std::shared_ptr<swing_planner::SwingTrajectoryPlanner> swingTrajectoryPtr)
     : ReferenceManager(TargetTrajectories(), ModeSchedule()),
       gaitSchedulePtr_(std::move(gaitSchedulePtr)),
       swingTrajectoryPtr_(std::move(swingTrajectoryPtr)) {}
@@ -68,5 +68,5 @@ void SwitchedModelReferenceManager::modifyReferences(scalar_t initTime, scalar_t
   swingTrajectoryPtr_->update(modeSchedule, terrainHeight);
 }
 
-}  // namespace legged_robot
-}  // namespace ocs2
+}  // namespace go2_ref
+}  // namespace legged

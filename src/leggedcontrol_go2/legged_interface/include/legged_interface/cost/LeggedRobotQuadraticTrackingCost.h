@@ -38,6 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace ocs2 {
 namespace legged_robot {
+using ::legged::go2_ref::SwitchedModelReferenceManager;
 
 /**
  * State-input tracking cost used for intermediate times

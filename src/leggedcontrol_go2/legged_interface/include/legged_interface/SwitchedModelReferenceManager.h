@@ -37,8 +37,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "legged_interface/constraint/SwingTrajectoryPlanner.h"
 
-namespace ocs2 {
-namespace legged_robot {
+namespace legged {
+namespace go2_ref {
 
 /**
  * Manages the ModeSchedule and the TargetTrajectories for switched model.
@@ -46,7 +46,7 @@ namespace legged_robot {
 class SwitchedModelReferenceManager : public ReferenceManager {
  public:
   SwitchedModelReferenceManager(std::shared_ptr<GaitSchedule> gaitSchedulePtr,
-                                 std::shared_ptr<::legged::swing_planner::SwingTrajectoryPlanner> swingTrajectoryPtr);
+                                 std::shared_ptr<swing_planner::SwingTrajectoryPlanner> swingTrajectoryPtr);
 
   ~SwitchedModelReferenceManager() override = default;
 
@@ -56,15 +56,15 @@ class SwitchedModelReferenceManager : public ReferenceManager {
 
   const std::shared_ptr<GaitSchedule>& getGaitSchedule() { return gaitSchedulePtr_; }
 
-  const std::shared_ptr<::legged::swing_planner::SwingTrajectoryPlanner>& getSwingTrajectoryPlanner() { return swingTrajectoryPtr_; }
+  const std::shared_ptr<swing_planner::SwingTrajectoryPlanner>& getSwingTrajectoryPlanner() { return swingTrajectoryPtr_; }
 
  protected:
   void modifyReferences(scalar_t initTime, scalar_t finalTime, const vector_t& initState, TargetTrajectories& targetTrajectories,
                         ModeSchedule& modeSchedule) override;
 
   std::shared_ptr<GaitSchedule> gaitSchedulePtr_;
-  std::shared_ptr<::legged::swing_planner::SwingTrajectoryPlanner> swingTrajectoryPtr_;
+  std::shared_ptr<swing_planner::SwingTrajectoryPlanner> swingTrajectoryPtr_;
 };
 
-}  // namespace legged_robot
-}  // namespace ocs2
+}  // namespace go2_ref
+}  // namespace legged

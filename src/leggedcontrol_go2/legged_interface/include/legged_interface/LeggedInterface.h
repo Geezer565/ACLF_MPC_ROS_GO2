@@ -31,6 +31,7 @@ struct DisturbanceEstimator;
 }}
 
 namespace legged {
+using go2_ref::SwitchedModelReferenceManager;
 using namespace ocs2;
 using namespace legged_robot;
 

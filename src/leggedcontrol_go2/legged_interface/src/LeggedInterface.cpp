@@ -52,7 +52,7 @@ class AdaptiveClf;
 void setupNewAdaptive(
     ocs2::OptimalControlProblem& problem,
     std::shared_ptr<DisturbanceEstimator>& estimator,
-    const ocs2::legged_robot::SwitchedModelReferenceManager& refManager,
+    const go2_ref::SwitchedModelReferenceManager& refManager,
     const ocs2::CentroidalModelInfo& info,
     const DisturbanceEstimator::Config&,
     const AdaptiveClf::Config&,

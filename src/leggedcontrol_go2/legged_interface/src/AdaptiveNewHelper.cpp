@@ -17,7 +17,7 @@
 #include <ocs2_centroidal_model/CentroidalModelInfo.h>
 #include <ocs2_legged_robot/common/Types.h>
 #include <ocs2_legged_robot/common/utils.h>
-#include <ocs2_legged_robot/reference_manager/SwitchedModelReferenceManager.h>
+#include "legged_interface/SwitchedModelReferenceManager.h"
 
 namespace legged {
 namespace new_adaptive {
@@ -25,6 +25,7 @@ namespace new_adaptive {
 using namespace ocs2;
 using namespace legged_robot;
 using namespace centroidal_model;
+using go2_ref::SwitchedModelReferenceManager;
 
 // ---- Lightweight disturbance estimator (replaces AdaptiveDisturbanceEstimator) ----
 struct DisturbanceEstimator {
