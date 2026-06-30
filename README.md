@@ -97,17 +97,34 @@ docker exec unitree_ros1_go2 bash -c \
 # 移除: python3 scripts/payload/spawn_payload.py none
 ```
 
-### 3. 采集数据
+### 3. 采集数据 → 提取 → 画图（三步管线）
+
+**Step A — 采集**: rosbag 录到 `gazebo_results/`
 ```bash
-# 录制 bag
 docker exec unitree_ros1_go2 bash -c \
   "source /opt/ros/noetic/setup.bash && \
-   rosbag record -O /root/catkin_ws/gazebo_results/exp.bag \
+   rosbag record -O /root/catkin_ws/gazebo_results/exp_legacy_flat_none/raw.bag \
    /legged_robot_mpc_observation /joint_states /cmd_vel --duration=30"
-
-# 或单话题采集
-rostopic echo /legged_robot_mpc_observation -n 500 > mpc_data.csv
 ```
+
+**Step B — 提取**: bag → CSV + metrics JSON
+```bash
+docker exec unitree_ros1_go2 bash -c \
+  "source /opt/ros/noetic/setup.bash && \
+   python3 /root/catkin_ws/scripts/_extract_bag.py \
+   /root/catkin_ws/gazebo_results/exp_legacy_flat_none/raw.bag \
+   /root/catkin_ws/gazebo_results/exp_legacy_flat_none"
+```
+
+**Step C — 画图**: 多实验对比
+```bash
+pip install matplotlib numpy   # 宿主机运行
+python scripts/gazebo_plot.py
+python scripts/gazebo_plot.py --list           # 查看已有实验
+python scripts/gazebo_plot.py --compare off legacy rbf
+```
+
+输出到 `gazebo_results/comparison/`：`path_comparison.png` `tracking_error.png` `payload_comparison.png`
 
 ### 4. 一键对比
 ```bash
