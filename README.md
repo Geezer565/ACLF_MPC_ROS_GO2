@@ -64,7 +64,68 @@ legged_robot_interface {
   adaptiveMode  "rbf"       # 论文 B: Dual-RBFNN 在线学习
 }
 ```
-改完重启仿真即可，无需重新编译。
+改完需重新编译 `legged_interface`，再重启仿真：
+```bash
+docker exec unitree_ros1_go2 bash -c \
+  "source /opt/ros/noetic/setup.bash && cd /root/catkin_ws && catkin build legged_interface legged_controllers --no-deps"
+```
+
+## 仿真实验 — 地形 × 控制器 × 负载对比
+
+### 1. 地形
+```bash
+# 生成6种地形 world 文件（宿主机运行）
+pip install numpy pillow
+python scripts/terrain_generator/terrains.py scripts/terrain_generator/output/
+
+# 启动指定地形
+docker exec -it unitree_ros1_go2 /root/start_go2_sim.sh \
+  /root/catkin_ws/scripts/terrain_generator/output/slope10.world
+```
+
+地形类型：`flat` / `slope10`(10°) / `slope20`(20°) / `stairs`(4cm台阶) / `rough`(随机起伏) / `varied`(复合过渡)
+
+### 2. 负载
+```bash
+# 仿真运行后新开终端
+docker exec unitree_ros1_go2 bash -c \
+  "source /opt/ros/noetic/setup.bash && source /root/catkin_ws/devel/setup.bash && \
+   python3 /root/catkin_ws/scripts/payload/spawn_payload.py brick_5kg"
+
+# 可用: none / brick_5kg / brick_10kg / box_16kg / box_21kg / offset_com / offset_com_left
+# 查看: python3 scripts/payload/spawn_payload.py --list
+# 移除: python3 scripts/payload/spawn_payload.py none
+```
+
+### 3. 采集数据
+```bash
+# 录制 bag
+docker exec unitree_ros1_go2 bash -c \
+  "source /opt/ros/noetic/setup.bash && \
+   rosbag record -O /root/catkin_ws/gazebo_results/exp.bag \
+   /legged_robot_mpc_observation /joint_states /cmd_vel --duration=30"
+
+# 或单话题采集
+rostopic echo /legged_robot_mpc_observation -n 500 > mpc_data.csv
+```
+
+### 4. 一键对比
+```bash
+python scripts/run_experiment.py --list          # 查看可用组合
+python scripts/run_experiment.py --mode rbf --terrain slope10 --payload brick_5kg
+python scripts/run_experiment.py --compare       # 全矩阵对比
+```
+
+### 实验矩阵
+
+| 目的 | 模式 | 地形 | 负载 |
+|------|------|------|------|
+| 基准 | off / legacy / rbf | flat | none |
+| 负重适应 | off / legacy / rbf | flat | brick_5kg, box_16kg |
+| 爬坡 | off / legacy / rbf | slope10, slope20 | none |
+| 崎岖 | legacy / rbf | rough, stairs | none |
+| CoM偏移 | legacy / rbf | flat | offset_com |
+| 综合 | legacy / rbf | varied | box_16kg |
 
 ## 调试
 

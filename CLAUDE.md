@@ -93,10 +93,21 @@ legged_robot_interface.adaptiveMode "rbf"     # 论文B
 3. `ocs2_legged_robot_adaptive/` 是独立包（新版外挂式 ACLF），未接入 Go2，仅作参考。
 4. OCS2 只有 `matrix_t`（动态尺寸），没有 `matrix3_t`/`vector3_t`。新增代码用 `Eigen::Matrix<scalar_t, 3, 3>` 或在自己命名空间定义别名。
 
+## 仿真实验模块
+
+| 模块 | 路径 | 用途 |
+|------|------|------|
+| 地形生成 | `scripts/terrain_generator/` | 6种地形：flat/slope/stairs/rough/varied |
+| 负载注入 | `scripts/payload/` | 7种预设：5.43~21.6kg + CoM偏移 |
+| 实验入口 | `scripts/run_experiment.py` | 模式 × 地形 × 负载 一键对比 |
+
+地形需要安装依赖后在宿主机运行（用 numpy + PIL 生成 heightmap）。
+负载在 Docker 内通过 Gazebo ROS service 动态注入。
+
 ## 当前任务
 
 通过完成 `PROCESS.md` 中 Phase 1-4 的 VAN-MPC 迁移。
-Phase 1 (RBFNN 替代 Y_u 回归矩阵) 架构已完成，**编译尚未通过**（约 5 个错误待修复）。
+Phase 1 (Dual-RBFNN 自适应估计器) 架构已完成，**编译已通过** (`catkin build` clean)。
 
 ## 参考文件索引
 
