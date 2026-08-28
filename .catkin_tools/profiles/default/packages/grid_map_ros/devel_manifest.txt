@@ -1,5 +1,0 @@
-grid_map/grid_map_ros
-/root/catkin_ws/devel/.private/grid_map_ros/lib/libgrid_map_ros.so /root/catkin_ws/devel/lib/libgrid_map_ros.so
-/root/catkin_ws/devel/.private/grid_map_ros/lib/pkgconfig/grid_map_ros.pc /root/catkin_ws/devel/lib/pkgconfig/grid_map_ros.pc
-/root/catkin_ws/devel/.private/grid_map_ros/share/grid_map_ros/cmake/grid_map_rosConfig.cmake /root/catkin_ws/devel/share/grid_map_ros/cmake/grid_map_rosConfig.cmake
-/root/catkin_ws/devel/.private/grid_map_ros/share/grid_map_ros/cmake/grid_map_rosConfig-version.cmake /root/catkin_ws/devel/share/grid_map_ros/cmake/grid_map_rosConfig-version.cmake

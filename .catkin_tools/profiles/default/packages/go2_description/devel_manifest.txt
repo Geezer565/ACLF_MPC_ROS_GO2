@@ -1,4 +1,0 @@
-unitree_ros/robots/go2_description
-/root/catkin_ws/devel/.private/go2_description/lib/pkgconfig/go2_description.pc /root/catkin_ws/devel/lib/pkgconfig/go2_description.pc
-/root/catkin_ws/devel/.private/go2_description/share/go2_description/cmake/go2_descriptionConfig-version.cmake /root/catkin_ws/devel/share/go2_description/cmake/go2_descriptionConfig-version.cmake
-/root/catkin_ws/devel/.private/go2_description/share/go2_description/cmake/go2_descriptionConfig.cmake /root/catkin_ws/devel/share/go2_description/cmake/go2_descriptionConfig.cmake

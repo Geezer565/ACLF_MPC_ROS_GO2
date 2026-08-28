@@ -1,8 +1,0 @@
-unitree_ros/unitree_controller
-/root/catkin_ws/devel/.private/unitree_controller/lib/libunitree_controller.so /root/catkin_ws/devel/lib/libunitree_controller.so
-/root/catkin_ws/devel/.private/unitree_controller/lib/unitree_controller/unitree_move_kinetic /root/catkin_ws/devel/lib/unitree_controller/unitree_move_kinetic
-/root/catkin_ws/devel/.private/unitree_controller/lib/unitree_controller/unitree_servo /root/catkin_ws/devel/lib/unitree_controller/unitree_servo
-/root/catkin_ws/devel/.private/unitree_controller/lib/unitree_controller/unitree_external_force /root/catkin_ws/devel/lib/unitree_controller/unitree_external_force
-/root/catkin_ws/devel/.private/unitree_controller/lib/pkgconfig/unitree_controller.pc /root/catkin_ws/devel/lib/pkgconfig/unitree_controller.pc
-/root/catkin_ws/devel/.private/unitree_controller/share/unitree_controller/cmake/unitree_controllerConfig-version.cmake /root/catkin_ws/devel/share/unitree_controller/cmake/unitree_controllerConfig-version.cmake
-/root/catkin_ws/devel/.private/unitree_controller/share/unitree_controller/cmake/unitree_controllerConfig.cmake /root/catkin_ws/devel/share/unitree_controller/cmake/unitree_controllerConfig.cmake

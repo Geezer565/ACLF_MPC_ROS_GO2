@@ -1,5 +1,0 @@
-ocs2-main/ocs2_test_tools/ocs2_qp_solver
-/root/catkin_ws/devel/.private/ocs2_qp_solver/lib/libocs2_qp_solver.so /root/catkin_ws/devel/lib/libocs2_qp_solver.so
-/root/catkin_ws/devel/.private/ocs2_qp_solver/lib/pkgconfig/ocs2_qp_solver.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_qp_solver.pc
-/root/catkin_ws/devel/.private/ocs2_qp_solver/share/ocs2_qp_solver/cmake/ocs2_qp_solverConfig.cmake /root/catkin_ws/devel/share/ocs2_qp_solver/cmake/ocs2_qp_solverConfig.cmake
-/root/catkin_ws/devel/.private/ocs2_qp_solver/share/ocs2_qp_solver/cmake/ocs2_qp_solverConfig-version.cmake /root/catkin_ws/devel/share/ocs2_qp_solver/cmake/ocs2_qp_solverConfig-version.cmake

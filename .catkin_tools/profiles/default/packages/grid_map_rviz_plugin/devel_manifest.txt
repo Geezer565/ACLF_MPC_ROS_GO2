@@ -1,5 +1,0 @@
-grid_map/grid_map_rviz_plugin
-/root/catkin_ws/devel/.private/grid_map_rviz_plugin/lib/libgrid_map_rviz_plugin.so /root/catkin_ws/devel/lib/libgrid_map_rviz_plugin.so
-/root/catkin_ws/devel/.private/grid_map_rviz_plugin/lib/pkgconfig/grid_map_rviz_plugin.pc /root/catkin_ws/devel/lib/pkgconfig/grid_map_rviz_plugin.pc
-/root/catkin_ws/devel/.private/grid_map_rviz_plugin/share/grid_map_rviz_plugin/cmake/grid_map_rviz_pluginConfig-version.cmake /root/catkin_ws/devel/share/grid_map_rviz_plugin/cmake/grid_map_rviz_pluginConfig-version.cmake
-/root/catkin_ws/devel/.private/grid_map_rviz_plugin/share/grid_map_rviz_plugin/cmake/grid_map_rviz_pluginConfig.cmake /root/catkin_ws/devel/share/grid_map_rviz_plugin/cmake/grid_map_rviz_pluginConfig.cmake

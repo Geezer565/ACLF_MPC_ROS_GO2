@@ -1,6 +1,0 @@
-leggedcontrol_go2/legged_examples/legged_unitree/legged_unitree_hw
-/root/catkin_ws/devel/.private/legged_unitree_hw/lib/legged_unitree_hw/legged_unitree_hw_3_3_1 /root/catkin_ws/devel/lib/legged_unitree_hw/legged_unitree_hw_3_3_1
-/root/catkin_ws/devel/.private/legged_unitree_hw/lib/legged_unitree_hw/legged_unitree_hw_3_8_0 /root/catkin_ws/devel/lib/legged_unitree_hw/legged_unitree_hw_3_8_0
-/root/catkin_ws/devel/.private/legged_unitree_hw/lib/pkgconfig/legged_unitree_hw.pc /root/catkin_ws/devel/lib/pkgconfig/legged_unitree_hw.pc
-/root/catkin_ws/devel/.private/legged_unitree_hw/share/legged_unitree_hw/cmake/legged_unitree_hwConfig-version.cmake /root/catkin_ws/devel/share/legged_unitree_hw/cmake/legged_unitree_hwConfig-version.cmake
-/root/catkin_ws/devel/.private/legged_unitree_hw/share/legged_unitree_hw/cmake/legged_unitree_hwConfig.cmake /root/catkin_ws/devel/share/legged_unitree_hw/cmake/legged_unitree_hwConfig.cmake

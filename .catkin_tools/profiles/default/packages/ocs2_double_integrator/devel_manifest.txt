@@ -1,7 +1,0 @@
-ocs2-main/ocs2_robotic_examples/ocs2_double_integrator
-/root/catkin_ws/devel/.private/ocs2_double_integrator/lib/libocs2_double_integrator.so /root/catkin_ws/devel/lib/libocs2_double_integrator.so
-/root/catkin_ws/devel/.private/ocs2_double_integrator/lib/python3/dist-packages/ocs2_double_integrator/__init__.py /root/catkin_ws/devel/lib/python3/dist-packages/ocs2_double_integrator/__init__.py
-/root/catkin_ws/devel/.private/ocs2_double_integrator/lib/python3/dist-packages/ocs2_double_integrator/DoubleIntegratorPyBindings.cpython-38-x86_64-linux-gnu.so /root/catkin_ws/devel/lib/python3/dist-packages/ocs2_double_integrator/DoubleIntegratorPyBindings.cpython-38-x86_64-linux-gnu.so
-/root/catkin_ws/devel/.private/ocs2_double_integrator/lib/pkgconfig/ocs2_double_integrator.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_double_integrator.pc
-/root/catkin_ws/devel/.private/ocs2_double_integrator/share/ocs2_double_integrator/cmake/ocs2_double_integratorConfig.cmake /root/catkin_ws/devel/share/ocs2_double_integrator/cmake/ocs2_double_integratorConfig.cmake
-/root/catkin_ws/devel/.private/ocs2_double_integrator/share/ocs2_double_integrator/cmake/ocs2_double_integratorConfig-version.cmake /root/catkin_ws/devel/share/ocs2_double_integrator/cmake/ocs2_double_integratorConfig-version.cmake

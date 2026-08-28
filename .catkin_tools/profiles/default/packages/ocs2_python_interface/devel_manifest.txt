@@ -1,5 +1,0 @@
-ocs2-main/ocs2_python_interface
-/root/catkin_ws/devel/.private/ocs2_python_interface/lib/libocs2_python_interface.so /root/catkin_ws/devel/lib/libocs2_python_interface.so
-/root/catkin_ws/devel/.private/ocs2_python_interface/lib/pkgconfig/ocs2_python_interface.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_python_interface.pc
-/root/catkin_ws/devel/.private/ocs2_python_interface/share/ocs2_python_interface/cmake/ocs2_python_interfaceConfig.cmake /root/catkin_ws/devel/share/ocs2_python_interface/cmake/ocs2_python_interfaceConfig.cmake
-/root/catkin_ws/devel/.private/ocs2_python_interface/share/ocs2_python_interface/cmake/ocs2_python_interfaceConfig-version.cmake /root/catkin_ws/devel/share/ocs2_python_interface/cmake/ocs2_python_interfaceConfig-version.cmake

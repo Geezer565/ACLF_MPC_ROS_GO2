@@ -2,6 +2,11 @@
 
 > 四足机器人自适应模型预测控制 — 仿真 + 真机部署
 
+> [!IMPORTANT]
+> 本仓库自 2026-08-28 起停止作为 MyRBF 当前开发入口，仅保留早期 Go2 框架和旧版自适应实现。当前 MyRBF、四方法实验、代表性数据和后续 Go2 迁移计划请使用新仓库：[`ACLF_MPC_MyRBF_Legged_Robot`](https://github.com/Geezer565/ACLF_MPC_MyRBF_Legged_Robot)。本仓库中的旧 RBF 代码和说明不能代表当前实验结果。
+
+清理范围和历史边界见 [`LEGACY_STATUS.md`](LEGACY_STATUS.md)。
+
 **论文基础**: Minniti et al., *Adaptive CLF-MPC With Application To Quadrupedal Robots*, IEEE RA-L 2021
 
 **控制链路**: NMPC (OCS2, 100Hz) → WBC (层级QP, 400Hz) → Kalman Filter → 关节力矩

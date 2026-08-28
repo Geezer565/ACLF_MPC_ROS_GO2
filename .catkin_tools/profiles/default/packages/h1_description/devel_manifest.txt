@@ -1,4 +1,0 @@
-unitree_ros/robots/h1_description
-/root/catkin_ws/devel/.private/h1_description/lib/pkgconfig/h1_description.pc /root/catkin_ws/devel/lib/pkgconfig/h1_description.pc
-/root/catkin_ws/devel/.private/h1_description/share/h1_description/cmake/h1_descriptionConfig-version.cmake /root/catkin_ws/devel/share/h1_description/cmake/h1_descriptionConfig-version.cmake
-/root/catkin_ws/devel/.private/h1_description/share/h1_description/cmake/h1_descriptionConfig.cmake /root/catkin_ws/devel/share/h1_description/cmake/h1_descriptionConfig.cmake

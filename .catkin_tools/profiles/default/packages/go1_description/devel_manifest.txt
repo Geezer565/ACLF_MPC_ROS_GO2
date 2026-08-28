@@ -1,4 +1,0 @@
-unitree_ros/robots/go1_description
-/root/catkin_ws/devel/.private/go1_description/lib/pkgconfig/go1_description.pc /root/catkin_ws/devel/lib/pkgconfig/go1_description.pc
-/root/catkin_ws/devel/.private/go1_description/share/go1_description/cmake/go1_descriptionConfig-version.cmake /root/catkin_ws/devel/share/go1_description/cmake/go1_descriptionConfig-version.cmake
-/root/catkin_ws/devel/.private/go1_description/share/go1_description/cmake/go1_descriptionConfig.cmake /root/catkin_ws/devel/share/go1_description/cmake/go1_descriptionConfig.cmake

@@ -1,5 +1,0 @@
-leggedcontrol_go2/legged_interface
-/root/catkin_ws/devel/.private/legged_interface/lib/liblegged_interface.so /root/catkin_ws/devel/lib/liblegged_interface.so
-/root/catkin_ws/devel/.private/legged_interface/lib/pkgconfig/legged_interface.pc /root/catkin_ws/devel/lib/pkgconfig/legged_interface.pc
-/root/catkin_ws/devel/.private/legged_interface/share/legged_interface/cmake/legged_interfaceConfig.cmake /root/catkin_ws/devel/share/legged_interface/cmake/legged_interfaceConfig.cmake
-/root/catkin_ws/devel/.private/legged_interface/share/legged_interface/cmake/legged_interfaceConfig-version.cmake /root/catkin_ws/devel/share/legged_interface/cmake/legged_interfaceConfig-version.cmake

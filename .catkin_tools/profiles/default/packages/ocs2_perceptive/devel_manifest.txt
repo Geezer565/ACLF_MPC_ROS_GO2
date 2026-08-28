@@ -1,6 +1,0 @@
-ocs2-main/ocs2_perceptive
-/root/catkin_ws/devel/.private/ocs2_perceptive/lib/libocs2_perceptive.so /root/catkin_ws/devel/lib/libocs2_perceptive.so
-/root/catkin_ws/devel/.private/ocs2_perceptive/lib/ocs2_perceptive/ocs2_perceptive_lintTarget /root/catkin_ws/devel/lib/ocs2_perceptive/ocs2_perceptive_lintTarget
-/root/catkin_ws/devel/.private/ocs2_perceptive/lib/pkgconfig/ocs2_perceptive.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_perceptive.pc
-/root/catkin_ws/devel/.private/ocs2_perceptive/share/ocs2_perceptive/cmake/ocs2_perceptiveConfig.cmake /root/catkin_ws/devel/share/ocs2_perceptive/cmake/ocs2_perceptiveConfig.cmake
-/root/catkin_ws/devel/.private/ocs2_perceptive/share/ocs2_perceptive/cmake/ocs2_perceptiveConfig-version.cmake /root/catkin_ws/devel/share/ocs2_perceptive/cmake/ocs2_perceptiveConfig-version.cmake

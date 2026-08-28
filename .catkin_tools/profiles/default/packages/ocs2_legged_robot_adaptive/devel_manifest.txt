@@ -1,5 +1,0 @@
-ocs2_legged_robot_adaptive
-/root/catkin_ws/devel/.private/ocs2_legged_robot_adaptive/lib/libocs2_legged_robot_adaptive.so /root/catkin_ws/devel/lib/libocs2_legged_robot_adaptive.so
-/root/catkin_ws/devel/.private/ocs2_legged_robot_adaptive/lib/pkgconfig/ocs2_legged_robot_adaptive.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_legged_robot_adaptive.pc
-/root/catkin_ws/devel/.private/ocs2_legged_robot_adaptive/share/ocs2_legged_robot_adaptive/cmake/ocs2_legged_robot_adaptiveConfig.cmake /root/catkin_ws/devel/share/ocs2_legged_robot_adaptive/cmake/ocs2_legged_robot_adaptiveConfig.cmake
-/root/catkin_ws/devel/.private/ocs2_legged_robot_adaptive/share/ocs2_legged_robot_adaptive/cmake/ocs2_legged_robot_adaptiveConfig-version.cmake /root/catkin_ws/devel/share/ocs2_legged_robot_adaptive/cmake/ocs2_legged_robot_adaptiveConfig-version.cmake

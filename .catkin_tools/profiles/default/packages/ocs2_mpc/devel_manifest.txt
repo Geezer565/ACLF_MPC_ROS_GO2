@@ -1,6 +1,0 @@
-ocs2-main/ocs2_mpc
-/root/catkin_ws/devel/.private/ocs2_mpc/lib/libocs2_mpc.so /root/catkin_ws/devel/lib/libocs2_mpc.so
-/root/catkin_ws/devel/.private/ocs2_mpc/lib/ocs2_mpc/ocs2_mpc_lintTarget /root/catkin_ws/devel/lib/ocs2_mpc/ocs2_mpc_lintTarget
-/root/catkin_ws/devel/.private/ocs2_mpc/lib/pkgconfig/ocs2_mpc.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_mpc.pc
-/root/catkin_ws/devel/.private/ocs2_mpc/share/ocs2_mpc/cmake/ocs2_mpcConfig.cmake /root/catkin_ws/devel/share/ocs2_mpc/cmake/ocs2_mpcConfig.cmake
-/root/catkin_ws/devel/.private/ocs2_mpc/share/ocs2_mpc/cmake/ocs2_mpcConfig-version.cmake /root/catkin_ws/devel/share/ocs2_mpc/cmake/ocs2_mpcConfig-version.cmake

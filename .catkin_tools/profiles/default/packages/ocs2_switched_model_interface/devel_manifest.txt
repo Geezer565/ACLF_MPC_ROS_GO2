@@ -1,5 +1,0 @@
-ocs2-main/ocs2_robotic_examples/ocs2_perceptive_anymal/ocs2_switched_model_interface
-/root/catkin_ws/devel/.private/ocs2_switched_model_interface/lib/libocs2_switched_model_interface.so /root/catkin_ws/devel/lib/libocs2_switched_model_interface.so
-/root/catkin_ws/devel/.private/ocs2_switched_model_interface/lib/pkgconfig/ocs2_switched_model_interface.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_switched_model_interface.pc
-/root/catkin_ws/devel/.private/ocs2_switched_model_interface/share/ocs2_switched_model_interface/cmake/ocs2_switched_model_interfaceConfig.cmake /root/catkin_ws/devel/share/ocs2_switched_model_interface/cmake/ocs2_switched_model_interfaceConfig.cmake
-/root/catkin_ws/devel/.private/ocs2_switched_model_interface/share/ocs2_switched_model_interface/cmake/ocs2_switched_model_interfaceConfig-version.cmake /root/catkin_ws/devel/share/ocs2_switched_model_interface/cmake/ocs2_switched_model_interfaceConfig-version.cmake

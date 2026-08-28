@@ -1,4 +1,0 @@
-ocs2_robotic_assets
-/root/catkin_ws/devel/.private/ocs2_robotic_assets/lib/pkgconfig/ocs2_robotic_assets.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_robotic_assets.pc
-/root/catkin_ws/devel/.private/ocs2_robotic_assets/share/ocs2_robotic_assets/cmake/ocs2_robotic_assetsConfig.cmake /root/catkin_ws/devel/share/ocs2_robotic_assets/cmake/ocs2_robotic_assetsConfig.cmake
-/root/catkin_ws/devel/.private/ocs2_robotic_assets/share/ocs2_robotic_assets/cmake/ocs2_robotic_assetsConfig-version.cmake /root/catkin_ws/devel/share/ocs2_robotic_assets/cmake/ocs2_robotic_assetsConfig-version.cmake

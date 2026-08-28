@@ -1,9 +1,0 @@
-unitree_ros/unitree_ros_to_real/unitree_legged_sdk
-/root/catkin_ws/devel/.private/unitree_legged_sdk/lib/unitree_legged_sdk/example_velocity /root/catkin_ws/devel/lib/unitree_legged_sdk/example_velocity
-/root/catkin_ws/devel/.private/unitree_legged_sdk/lib/unitree_legged_sdk/example_joystick /root/catkin_ws/devel/lib/unitree_legged_sdk/example_joystick
-/root/catkin_ws/devel/.private/unitree_legged_sdk/lib/unitree_legged_sdk/example_torque /root/catkin_ws/devel/lib/unitree_legged_sdk/example_torque
-/root/catkin_ws/devel/.private/unitree_legged_sdk/lib/unitree_legged_sdk/example_position /root/catkin_ws/devel/lib/unitree_legged_sdk/example_position
-/root/catkin_ws/devel/.private/unitree_legged_sdk/lib/unitree_legged_sdk/example_walk /root/catkin_ws/devel/lib/unitree_legged_sdk/example_walk
-/root/catkin_ws/devel/.private/unitree_legged_sdk/lib/pkgconfig/unitree_legged_sdk.pc /root/catkin_ws/devel/lib/pkgconfig/unitree_legged_sdk.pc
-/root/catkin_ws/devel/.private/unitree_legged_sdk/share/unitree_legged_sdk/cmake/unitree_legged_sdkConfig-version.cmake /root/catkin_ws/devel/share/unitree_legged_sdk/cmake/unitree_legged_sdkConfig-version.cmake
-/root/catkin_ws/devel/.private/unitree_legged_sdk/share/unitree_legged_sdk/cmake/unitree_legged_sdkConfig.cmake /root/catkin_ws/devel/share/unitree_legged_sdk/cmake/unitree_legged_sdkConfig.cmake

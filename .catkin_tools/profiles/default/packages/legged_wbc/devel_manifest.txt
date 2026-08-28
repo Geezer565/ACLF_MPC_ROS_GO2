@@ -1,5 +1,0 @@
-leggedcontrol_go2/legged_wbc
-/root/catkin_ws/devel/.private/legged_wbc/lib/liblegged_wbc.so /root/catkin_ws/devel/lib/liblegged_wbc.so
-/root/catkin_ws/devel/.private/legged_wbc/lib/pkgconfig/legged_wbc.pc /root/catkin_ws/devel/lib/pkgconfig/legged_wbc.pc
-/root/catkin_ws/devel/.private/legged_wbc/share/legged_wbc/cmake/legged_wbcConfig.cmake /root/catkin_ws/devel/share/legged_wbc/cmake/legged_wbcConfig.cmake
-/root/catkin_ws/devel/.private/legged_wbc/share/legged_wbc/cmake/legged_wbcConfig-version.cmake /root/catkin_ws/devel/share/legged_wbc/cmake/legged_wbcConfig-version.cmake

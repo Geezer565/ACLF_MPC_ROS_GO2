@@ -1,5 +1,0 @@
-ocs2-main/ocs2_ocs2
-/root/catkin_ws/devel/.private/ocs2_ocs2/lib/pkgconfig/ocs2_ocs2.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_ocs2.pc
-/root/catkin_ws/devel/.private/ocs2_ocs2/lib/ocs2_ocs2/ocs2_ocs2_lintTarget /root/catkin_ws/devel/lib/ocs2_ocs2/ocs2_ocs2_lintTarget
-/root/catkin_ws/devel/.private/ocs2_ocs2/share/ocs2_ocs2/cmake/ocs2_ocs2Config-version.cmake /root/catkin_ws/devel/share/ocs2_ocs2/cmake/ocs2_ocs2Config-version.cmake
-/root/catkin_ws/devel/.private/ocs2_ocs2/share/ocs2_ocs2/cmake/ocs2_ocs2Config.cmake /root/catkin_ws/devel/share/ocs2_ocs2/cmake/ocs2_ocs2Config.cmake

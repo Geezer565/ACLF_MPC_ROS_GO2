@@ -1,5 +1,0 @@
-ocs2-main/ocs2_pinocchio/ocs2_pinocchio_interface
-/root/catkin_ws/devel/.private/ocs2_pinocchio_interface/lib/libocs2_pinocchio_interface.so /root/catkin_ws/devel/lib/libocs2_pinocchio_interface.so
-/root/catkin_ws/devel/.private/ocs2_pinocchio_interface/lib/pkgconfig/ocs2_pinocchio_interface.pc /root/catkin_ws/devel/lib/pkgconfig/ocs2_pinocchio_interface.pc
-/root/catkin_ws/devel/.private/ocs2_pinocchio_interface/share/ocs2_pinocchio_interface/cmake/ocs2_pinocchio_interfaceConfig-version.cmake /root/catkin_ws/devel/share/ocs2_pinocchio_interface/cmake/ocs2_pinocchio_interfaceConfig-version.cmake
-/root/catkin_ws/devel/.private/ocs2_pinocchio_interface/share/ocs2_pinocchio_interface/cmake/ocs2_pinocchio_interfaceConfig.cmake /root/catkin_ws/devel/share/ocs2_pinocchio_interface/cmake/ocs2_pinocchio_interfaceConfig.cmake

@@ -9,6 +9,9 @@ build/
 devel/
 logs/
 install/
+.catkin_tools/
+.catkin_workspace
+.disabled_pkgs/
 
 # IDE
 .vscode/
@@ -27,8 +30,12 @@ Thumbs.db
 # Gazebo simulation outputs
 gazebo_results/
 
-# PDFs (text versions in .txt)
+# Papers and extracted text are not stored in this legacy code repository
 *.pdf
+.paper*.txt
+
+# Local assistant/project notes
+CLAUDE.md
 
 # Scripts generated data
 scripts/*.bag
